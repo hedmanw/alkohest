@@ -26,23 +26,28 @@ libraryDependencies ++= Seq(
   "org.scalatest"           %% "scalatest"                      % "2.2.1"               % "test",
   "org.scalatra"            %% "scalatra"                       % "2.3.0.RC3",
   "org.scalatra"            %% "scalatra-scalate"               % "2.3.0.RC3",
-  "org.scalatra"            %% "scalatra-json"                  % "2.3.0.RC3",
-  "org.scalatra"            %% "scalatra-swagger"               % "2.3.0.RC3",
-  "org.scalatra"            %% "scalatra-swagger-ext"           % "2.3.0.RC3",
+  "org.scalatra"            %% "scalatra-json"                  % "2.4.0.RC1",
+//  "org.scalatra"            %% "scalatra-swagger"               % "2.3.0.RC3",
+//  "org.scalatra"            %% "scalatra-swagger-ext"           % "2.3.0.RC3",
   "org.scalatra"            %% "scalatra-slf4j"                 % "2.3.0.RC3",
-  "org.json4s"              %% "json4s-jackson"                 % "3.2.10",
+//  "org.json4s"              %% "json4s-jackson"                 % "3.2.10",
+  "org.json4s"              %% "json4s-native"                  % "3.2.11",
   "org.json4s"              %% "json4s-ext"                     % "3.2.10",
   "commons-codec"            % "commons-codec"                  % "1.7",
   "net.databinder.dispatch" %% "dispatch-core"                  % "0.11.2",
-  //"net.databinder.dispatch" %% "json4s-jackson"                 % "0.11.2",
   "net.databinder.dispatch" %% "dispatch-json4s-jackson"        % "0.11.2",
   "com.typesafe.akka"       %% "akka-actor"                     % "2.3.6",
+  "org.squeryl"             %% "squeryl"                        % "0.9.5-7",
+  "com.h2database"           % "h2"                             % "1.3.166",
+  "c3p0"                     % "c3p0"                           % "0.9.1.2",
   "org.eclipse.jetty"        % "jetty-server"                   % "9.2.3.v20140905" % "container;compile;test",
   "org.eclipse.jetty"        % "jetty-webapp"                   % "9.2.3.v20140905" % "container;compile;test",
   "org.eclipse.jetty.orbit"  % "javax.servlet"                  % "3.0.0.v201112011016" % "container;compile;provided;test" artifacts (Artifact("javax.servlet", "jar", "jar"))
 )
 
 resolvers += "Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.m2/repository"
+
+resolvers += "Maven central" at "http://repo1.maven.org/maven2"
 
 resolvers += "Sonatype OSS Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
 
