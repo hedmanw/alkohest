@@ -1,0 +1,207 @@
+swagger: '2.0'
+info:
+  title: Hest API
+  description: Unleash your horse powers! 
+  version: "1.0.0"
+# the domain of the service
+host: api.alkohest.se
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /course:
+    get:
+      summary: Get all courses
+      description: |
+        List all available courses.
+      tags:
+        - Courses
+      responses:
+        200:
+          description: An array of courses
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Course'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create a new course
+      description: |
+        Create a new course with specified parameters. 
+      tags:
+        - Courses
+      responses:
+        200:
+          description: Created successfully. Returns created.
+          schema:
+            $ref: '#/definitions/Course'
+        302:
+          description: Course already exists (Existing is returned).
+          schema:
+            $ref: '#/definitions/Course'
+        401:
+          description: Unauthorized.
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API key
+          required: true
+          type: string
+        - name: courseCode
+          in: query
+          description: Course code
+          required: true
+          type: string
+        - name: courseName
+          in: query
+          description: Course name
+          required: true
+          type: string
+        - name: courseHomepage
+          in: query
+          description: Course homepage
+          required: true
+          type: string
+        - name: fireUrl
+          in: query
+          description: Fire url
+          required: false
+          type: string
+  /course/{id}:
+    get:
+      summary: Get a specific course
+      description: |
+        Get contents of a specific course by id. 
+      tags:
+        - Courses
+      responses:
+        200:
+          description: A specific, requested course
+          schema:
+            $ref: '#/definitions/Course'
+        404:
+          description: Course not found.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+        - name: id
+          in: path
+          description: Id of course
+          required: true
+          type: string
+    post:
+      summary: Change course details
+      description: |
+        Change details of a course by id.
+      tags:
+        - Courses
+      responses:
+        200:
+          description: Created successfully.
+        401:
+          description: Unauthorized.
+        404:
+          description: Course not found.
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API key
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: Id of the course to be updated
+          required: true
+          type: string
+        - name: courseCode
+          in: query
+          description: Course code
+          required: true
+          type: string
+        - name: courseName
+          in: query
+          description: Course name
+          required: true
+          type: string
+        - name: courseHomepage
+          in: query
+          description: Course homepage
+          required: true
+          type: string
+        - name: fireUrl
+          in: query
+          description: Fire url
+          required: false
+          type: string
+    delete:
+      summary: Delete course!
+      description: |
+        Delete a course by its id. Course should never be deleted in production. If a course steps its course code, it should rather be changed.
+      tags:
+        - Courses
+      responses:
+        200:
+          description: Deleted successfully.
+        401:
+          description: Unauthorized.
+        404:
+          description: Course not found.
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+        - name: x-api-key
+          in: header
+          description: API key
+          required: true
+          type: string
+        - name: id
+          in: path
+          description: Id of the course to be deleted
+          required: true
+          type: string
+definitions:
+  Course:
+    properties:
+      course_id:
+        type: integer
+        description: Course id.
+      course_code:
+        type: string
+        description: Course code.
+      course_name:
+        type: string
+        description: Course name.
+      course_url:
+        type: string
+        description: Course homepage.
+      fire:
+        type: string
+        description: Fire page.
+  Error:
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
