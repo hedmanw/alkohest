@@ -1,15 +1,60 @@
 {
-  "name": "Alkohest",
-  "version": "1.0.0",
-  "description": "Unleash your horse powers!",
-  "main": "index.js",
+  "name": "alkohest",
+  "version": "0.0.1",
+  "description": "Unleash your horsepowers",
+  "main": "src/main.jsx",
+  "scripts": {
+    "watch": "npm run watch-js & npm start",
+    "watch-js": "watchify --debug src/main.jsx -o build/app.js -v",
+    "build": "browserify src/main.jsx | uglifyjs --compress --mangle -o build/app.js -- -",
+    "test": "mochify",
+    "test-watch": "mochify --watch",
+    "cover": "node cover.js && cat lcov.info | coveralls && rm lcov.info",
+    "start": "babel-node server.js",
+    "clean": "rm build/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hedmanw/alkohest"
+  },
   "keywords": [
-    "swagger"
+    "alkohest",
+    "sprit",
+    "döden"
   ],
-  "license": "MIT",
-  "private": true,
+  "author": "Wilhelm Hedman",
+  "license": "Beerware",
+  "bugs": {
+    "url": "https://github.com/hedmanw/alkohest/issues"
+  },
+  "homepage": "http://alkohest.se",
+  "devDependencies": {
+    "babel": "^4.7.16",
+    "babelify": "^5.0.4",
+    "body-parser": "^1.12.2",
+    "browserify": "^9.0.3",
+    "coveralls": "^2.11.2",
+    "expect.js": "^0.3.1",
+    "express": "^4.12.2",
+    "mochify": "^2.6.0",
+    "mochify-istanbul": "^2.1.1",
+    "uglify-js": "^2.4.16",
+    "watchify": "^2.4.0"
+  },
   "dependencies": {
-    "connect": "^3.2.0",
-    "swagger-tools": "0.8.*"
+    "bootstrap": "^3.3.4",
+    "console-polyfill": "^0.2.0",
+    "es5-shim": "^4.1.0",
+    "jquery": "^2.1.3",
+    "moment": "^2.10.2",
+    "q": "^1.2.0",
+    "react": "^0.13.1",
+    "react-router": "^0.13.2",
+    "xhr": "^2.0.1"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
   }
 }
