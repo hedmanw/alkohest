@@ -9,14 +9,12 @@
   "host": "localhost:8080",
   "basePath": "/v1",
   "paths": {
-
     "/course": {
       "get": {
         "x-swagger-router-controller": "Courses",
         "tags": ["Courses"],
         "operationId": "courseGet",
         "responses": {
-
           "200": {
             "description" : "An array of courses",
             "schema" : {
@@ -25,28 +23,22 @@
                 "$ref" : "#/definitions/Course"
               }
             }
-          }
-        ,
-
+          },
           "default": {
             "description" : "Unexpected error.",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           }
-
-
         }
       }
-    } ,
-
+    },
     "/course": {
       "post": {
         "x-swagger-router-controller": "Courses",
         "tags": ["Courses"],
         "operationId": "coursePost",
         "parameters": [
-
           {
             "name" : "x-api-key",
             "in" : "header",
@@ -54,7 +46,6 @@
             "required" : true,
             "type" : "string"
           },
-
           {
             "name" : "courseCode",
             "in" : "query",
@@ -62,7 +53,6 @@
             "required" : true,
             "type" : "string"
           },
-
           {
             "name" : "courseName",
             "in" : "query",
@@ -70,7 +60,6 @@
             "required" : true,
             "type" : "string"
           },
-
           {
             "name" : "courseHomepage",
             "in" : "query",
@@ -78,7 +67,6 @@
             "required" : true,
             "type" : "string"
           },
-
           {
             "name" : "fireUrl",
             "in" : "query",
@@ -86,50 +74,38 @@
             "required" : false,
             "type" : "string"
           }
-
         ],
         "responses": {
-
           "200": {
             "description" : "Created successfully. Returns created.",
             "schema" : {
               "$ref" : "#/definitions/Course"
             }
-          }
-        ,
-
+          },
           "302": {
             "description" : "Course already exists (Existing is returned).",
             "schema" : {
               "$ref" : "#/definitions/Course"
             }
-          }
-        ,
-
+          },
           "401": {
             "description" : "Unauthorized."
-          }
-        ,
-
+          },
           "default": {
             "description" : "Unexpected error.",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           }
-
-
         }
       }
-    } ,
-
+    },
     "/course/{id}": {
       "get": {
         "x-swagger-router-controller": "Courses",
         "tags": ["Courses"],
         "operationId": "courseIdGet",
         "parameters": [
-
           {
             "name" : "id",
             "in" : "path",
@@ -137,42 +113,32 @@
             "required" : true,
             "type" : "string"
           }
-
         ],
         "responses": {
-
           "200": {
             "description" : "A specific, requested course",
             "schema" : {
               "$ref" : "#/definitions/Course"
             }
-          }
-        ,
-
+          },
           "404": {
             "description" : "Course not found."
-          }
-        ,
-
+          },
           "default": {
             "description" : "Unexpected error",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           }
-
-
         }
       }
-    } ,
-
+    },
     "/course/{id}": {
       "post": {
         "x-swagger-router-controller": "Courses",
         "tags": ["Courses"],
         "operationId": "courseIdPost",
         "parameters": [
-
           {
             "name" : "x-api-key",
             "in" : "header",
@@ -180,7 +146,6 @@
             "required" : true,
             "type" : "string"
           },
-
           {
             "name" : "id",
             "in" : "path",
@@ -188,7 +153,6 @@
             "required" : true,
             "type" : "string"
           },
-
           {
             "name" : "courseCode",
             "in" : "query",
@@ -196,7 +160,6 @@
             "required" : true,
             "type" : "string"
           },
-
           {
             "name" : "courseName",
             "in" : "query",
@@ -204,7 +167,6 @@
             "required" : true,
             "type" : "string"
           },
-
           {
             "name" : "courseHomepage",
             "in" : "query",
@@ -212,7 +174,6 @@
             "required" : true,
             "type" : "string"
           },
-
           {
             "name" : "fireUrl",
             "in" : "query",
@@ -220,44 +181,32 @@
             "required" : false,
             "type" : "string"
           }
-
         ],
         "responses": {
-
           "200": {
             "description" : "Created successfully."
-          }
-        ,
-
+          },
           "401": {
             "description" : "Unauthorized."
-          }
-        ,
-
+          },
           "404": {
             "description" : "Course not found."
-          }
-        ,
-
+          },
           "default": {
             "description" : "Unexpected error.",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           }
-
-
         }
       }
-    } ,
-
+    },
     "/course/{id}": {
       "delete": {
         "x-swagger-router-controller": "Courses",
         "tags": ["Courses"],
         "operationId": "courseIdDelete",
         "parameters": [
-
           {
             "name" : "x-api-key",
             "in" : "header",
@@ -265,7 +214,6 @@
             "required" : true,
             "type" : "string"
           },
-
           {
             "name" : "id",
             "in" : "path",
@@ -273,76 +221,66 @@
             "required" : true,
             "type" : "string"
           }
-
         ],
         "responses": {
-
           "200": {
             "description" : "Deleted successfully."
-          }
-        ,
-
+          },
           "401": {
             "description" : "Unauthorized."
-          }
-        ,
-
+          },
           "404": {
             "description" : "Course not found."
-          }
-        ,
-
+          },
           "default": {
             "description" : "Unexpected error.",
             "schema" : {
               "$ref" : "#/definitions/Error"
             }
           }
-
-
         }
       }
     }
-
-
-  }, "definitions": {
-  "Course": {
-    "properties" : {
-      "course_id" : {
-        "type" : "integer",
-        "format" : "int32",
-        "description" : "Course id."
-      },
-      "course_code" : {
-        "type" : "string",
-        "description" : "Course code."
-      },
-      "course_name" : {
-        "type" : "string",
-        "description" : "Course name."
-      },
-      "course_url" : {
-        "type" : "string",
-        "description" : "Course homepage."
-      },
-      "fire" : {
-        "type" : "string",
-        "description" : "Fire page."
+  },
+  "definitions": {
+    "Course": {
+      "properties" : {
+        "course_id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Course id."
+        },
+        "course_code" : {
+          "type" : "string",
+          "description" : "Course code."
+        },
+        "course_name" : {
+          "type" : "string",
+          "description" : "Course name."
+        },
+        "course_url" : {
+          "type" : "string",
+          "description" : "Course homepage."
+        },
+        "fire" : {
+          "type" : "string",
+          "description" : "Fire page."
+        }
       }
-    }
-  },"Error": {
-    "properties" : {
-      "code" : {
-        "type" : "integer",
-        "format" : "int32"
-      },
-      "message" : {
-        "type" : "string"
-      },
-      "fields" : {
-        "type" : "string"
+    },
+    "Error": {
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "fields" : {
+          "type" : "string"
+        }
       }
     }
   }
-}
 }
