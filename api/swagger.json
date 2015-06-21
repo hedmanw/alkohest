@@ -1,0 +1,348 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hest API",
+    "description": "Unleash your horse powers!",
+    "version": "1.0.0"
+  },
+  "produces": ["application/json"],
+  "host": "localhost:8080",
+  "basePath": "/v1",
+  "paths": {
+
+    "/course": {
+      "get": {
+        "x-swagger-router-controller": "Courses",
+        "tags": ["Courses"],
+        "operationId": "courseGet",
+        "responses": {
+
+          "200": {
+            "description" : "An array of courses",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Course"
+              }
+            }
+          }
+        ,
+
+          "default": {
+            "description" : "Unexpected error.",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+
+
+        }
+      }
+    } ,
+
+    "/course": {
+      "post": {
+        "x-swagger-router-controller": "Courses",
+        "tags": ["Courses"],
+        "operationId": "coursePost",
+        "parameters": [
+
+          {
+            "name" : "x-api-key",
+            "in" : "header",
+            "description" : "API key",
+            "required" : true,
+            "type" : "string"
+          },
+
+          {
+            "name" : "courseCode",
+            "in" : "query",
+            "description" : "Course code",
+            "required" : true,
+            "type" : "string"
+          },
+
+          {
+            "name" : "courseName",
+            "in" : "query",
+            "description" : "Course name",
+            "required" : true,
+            "type" : "string"
+          },
+
+          {
+            "name" : "courseHomepage",
+            "in" : "query",
+            "description" : "Course homepage",
+            "required" : true,
+            "type" : "string"
+          },
+
+          {
+            "name" : "fireUrl",
+            "in" : "query",
+            "description" : "Fire url",
+            "required" : false,
+            "type" : "string"
+          }
+
+        ],
+        "responses": {
+
+          "200": {
+            "description" : "Created successfully. Returns created.",
+            "schema" : {
+              "$ref" : "#/definitions/Course"
+            }
+          }
+        ,
+
+          "302": {
+            "description" : "Course already exists (Existing is returned).",
+            "schema" : {
+              "$ref" : "#/definitions/Course"
+            }
+          }
+        ,
+
+          "401": {
+            "description" : "Unauthorized."
+          }
+        ,
+
+          "default": {
+            "description" : "Unexpected error.",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+
+
+        }
+      }
+    } ,
+
+    "/course/{id}": {
+      "get": {
+        "x-swagger-router-controller": "Courses",
+        "tags": ["Courses"],
+        "operationId": "courseIdGet",
+        "parameters": [
+
+          {
+            "name" : "id",
+            "in" : "path",
+            "description" : "Id of course",
+            "required" : true,
+            "type" : "string"
+          }
+
+        ],
+        "responses": {
+
+          "200": {
+            "description" : "A specific, requested course",
+            "schema" : {
+              "$ref" : "#/definitions/Course"
+            }
+          }
+        ,
+
+          "404": {
+            "description" : "Course not found."
+          }
+        ,
+
+          "default": {
+            "description" : "Unexpected error",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+
+
+        }
+      }
+    } ,
+
+    "/course/{id}": {
+      "post": {
+        "x-swagger-router-controller": "Courses",
+        "tags": ["Courses"],
+        "operationId": "courseIdPost",
+        "parameters": [
+
+          {
+            "name" : "x-api-key",
+            "in" : "header",
+            "description" : "API key",
+            "required" : true,
+            "type" : "string"
+          },
+
+          {
+            "name" : "id",
+            "in" : "path",
+            "description" : "Id of the course to be updated",
+            "required" : true,
+            "type" : "string"
+          },
+
+          {
+            "name" : "courseCode",
+            "in" : "query",
+            "description" : "Course code",
+            "required" : true,
+            "type" : "string"
+          },
+
+          {
+            "name" : "courseName",
+            "in" : "query",
+            "description" : "Course name",
+            "required" : true,
+            "type" : "string"
+          },
+
+          {
+            "name" : "courseHomepage",
+            "in" : "query",
+            "description" : "Course homepage",
+            "required" : true,
+            "type" : "string"
+          },
+
+          {
+            "name" : "fireUrl",
+            "in" : "query",
+            "description" : "Fire url",
+            "required" : false,
+            "type" : "string"
+          }
+
+        ],
+        "responses": {
+
+          "200": {
+            "description" : "Created successfully."
+          }
+        ,
+
+          "401": {
+            "description" : "Unauthorized."
+          }
+        ,
+
+          "404": {
+            "description" : "Course not found."
+          }
+        ,
+
+          "default": {
+            "description" : "Unexpected error.",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+
+
+        }
+      }
+    } ,
+
+    "/course/{id}": {
+      "delete": {
+        "x-swagger-router-controller": "Courses",
+        "tags": ["Courses"],
+        "operationId": "courseIdDelete",
+        "parameters": [
+
+          {
+            "name" : "x-api-key",
+            "in" : "header",
+            "description" : "API key",
+            "required" : true,
+            "type" : "string"
+          },
+
+          {
+            "name" : "id",
+            "in" : "path",
+            "description" : "Id of the course to be deleted",
+            "required" : true,
+            "type" : "string"
+          }
+
+        ],
+        "responses": {
+
+          "200": {
+            "description" : "Deleted successfully."
+          }
+        ,
+
+          "401": {
+            "description" : "Unauthorized."
+          }
+        ,
+
+          "404": {
+            "description" : "Course not found."
+          }
+        ,
+
+          "default": {
+            "description" : "Unexpected error.",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+
+
+        }
+      }
+    }
+
+
+  }, "definitions": {
+  "Course": {
+    "properties" : {
+      "course_id" : {
+        "type" : "integer",
+        "format" : "int32",
+        "description" : "Course id."
+      },
+      "course_code" : {
+        "type" : "string",
+        "description" : "Course code."
+      },
+      "course_name" : {
+        "type" : "string",
+        "description" : "Course name."
+      },
+      "course_url" : {
+        "type" : "string",
+        "description" : "Course homepage."
+      },
+      "fire" : {
+        "type" : "string",
+        "description" : "Fire page."
+      }
+    }
+  },"Error": {
+    "properties" : {
+      "code" : {
+        "type" : "integer",
+        "format" : "int32"
+      },
+      "message" : {
+        "type" : "string"
+      },
+      "fields" : {
+        "type" : "string"
+      }
+    }
+  }
+}
+}

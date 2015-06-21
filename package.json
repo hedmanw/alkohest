@@ -1,0 +1,15 @@
+{
+  "name": "Alkohest",
+  "version": "1.0.0",
+  "description": "Unleash your horse powers!",
+  "main": "index.js",
+  "keywords": [
+    "swagger"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "swagger-tools": "0.8.*"
+  }
+}
