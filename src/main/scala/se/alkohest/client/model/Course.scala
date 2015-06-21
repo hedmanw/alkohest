@@ -1,6 +1,4 @@
-package com.wordnik.client.model
-
-
+package se.alkohest.client.model
 
 case class Course (
   course_id: Int,
