@@ -17,7 +17,17 @@ let App = React.createClass({
         return (
             <div>
                 <NavBar/>
-                {/* this is the important part */}
+                <div className="homepage-billboard">
+                    <div className="billboard-container">
+                        <div className="container-fluid">
+                            <div className="homepage-title-container">
+                                <div className="homepage-title homepage-quotation">
+                                    plugga?
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <RouteHandler/>
             </div>
         );

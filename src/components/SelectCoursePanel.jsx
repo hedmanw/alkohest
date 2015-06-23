@@ -2,7 +2,13 @@ import React from "react";
 
 let SelectCoursePanel = React.createClass({
     render() {
-        return (<h1>Hej!</h1>)
+        return (
+            <div className="container-courses">
+                <div className="container">
+                    <h1>Hej!</h1>
+                </div>
+            </div>
+        )
     }
 });
 
