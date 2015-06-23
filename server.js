@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import courses from './model/course.js'
 
 let app = express();
 
@@ -10,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/course', function(req, res) {
-    res.send("Hello!\n")
+    res.send(courses.getAll())
 });
 
 app.post('/course', function(req, res) {
@@ -23,8 +24,7 @@ app.post('/course', function(req, res) {
 });
 
 app.get('/course/:course_id', function(req, res) {
-    let courseId = req.params.course_id;
-    res.send(courseId + "\n");
+    res.send(courses.getById(req.params.course_id));
 });
 
 app.post('/course/:course_id', function(req, res) {
