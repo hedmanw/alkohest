@@ -39,13 +39,9 @@ paths:
         - Courses
       responses:
         200:
-          description: Created successfully. Returns created.
-          schema:
-            $ref: '#/definitions/Course'
+          description: Created successfully. Returns URI.
         302:
-          description: Course already exists (Existing is returned).
-          schema:
-            $ref: '#/definitions/Course'
+          description: Course already exists. Returns URI.
         401:
           description: Unauthorized.
         default:
