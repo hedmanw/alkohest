@@ -5,7 +5,6 @@ import courses from './model/course.js'
 let app = express();
 
 app.use(express.static(__dirname + '/build'));
-app.use(express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

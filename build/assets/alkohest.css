@@ -155,13 +155,16 @@ h1, h2 {
     }
 }
 
-.floating-link {
+.hest-backdrop {
     color: #f1f1f1;
+}
+
+.dotted-link {
     border-bottom: 1px dotted #f1f1f1;
     text-decoration: none;
 }
 
-.floating-link:hover {
+.dotted-link:hover {
     color: #4a90e2;
     border-bottom: 1px dotted #4a90e2;
     text-decoration: none;

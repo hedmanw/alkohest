@@ -4,25 +4,18 @@ import {Link, State} from "react-router";
 let NavBar = React.createClass({
     render() {
         return (
-            <nav className="navbar navbar-inverse navbar-fixed-top">
-                <div className="container">
-                    <div className="navbar-header">
-                        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span className="sr-only">Toggle navigation</span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                            <span className="icon-bar"></span>
-                        </button>
-                        <Link to="app" className="navbar-brand">Alkohest</Link>
-                    </div>
-                    <div id="navbar" className="navbar-collapse collapse">
-                        <ul className="nav navbar-nav">
-                            <NavTab to="app">Home</NavTab>
-                            <NavTab to="select">Select courses</NavTab>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+        <nav className="grey darken-4" role="navigation">
+            <div className="nav-wrapper container"><a id="logo-container" href="#" className="brand-logo navbar-brand">Alkohest</a>
+                <ul className="right hide-on-med-and-down">
+                    <NavTab to="select">Alla kurser</NavTab>
+                </ul>
+
+                <ul id="nav-mobile" className="side-nav">
+                    <NavTab to="select">Alla kurser</NavTab>
+                </ul>
+                <a href="#" data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
+            </div>
+        </nav>
         );
     }
 });
