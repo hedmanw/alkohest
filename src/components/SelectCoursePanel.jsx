@@ -1,5 +1,6 @@
 import React from "react";
 import CourseList from "./CourseList.jsx";
+import CourseClient from "../clients/CourseClient.jsx";
 
 let SelectCoursePanel = React.createClass({
     getInitialState() {
@@ -8,17 +9,15 @@ let SelectCoursePanel = React.createClass({
         };
     },
     componentDidMount() {
-        $.ajax({
-            url: "http://localhost:8080/course",
-            dataType: 'json',
-            cache: false,
-            success: function(data) {
+        CourseClient.getAll(
+            function(data) {
                 this.setState({data: data});
             }.bind(this),
-            error: function(xhr, status, err) {
-                console.error("Cannot GET /course", status, err.toString());
+            function() {
+                // Go cry.
             }
-        });
+        )
+
     },
     render() {
         return (

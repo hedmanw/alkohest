@@ -10,7 +10,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/course', function(req, res) {
-    res.send(courses.getAll())
+    let ids = req.query.ids;
+    if (ids) {
+        res.send(courses.getByIds(JSON.parse(ids)))
+    }
+    else {
+        res.send(courses.getAll())
+    }
 });
 
 app.post('/course', function(req, res) {

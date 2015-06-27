@@ -8,7 +8,10 @@ class CourseData {
         ]
     }
     getById(id) {
-        return this.getAll().filter(item => item.id === id);
+        return this.getAll().filter(item => item.id === id)[0];
+    }
+    getByIds(ids) {
+        return ids.map(id => this.getById(id))
     }
 }
 
