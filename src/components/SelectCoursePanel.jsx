@@ -30,7 +30,7 @@ let SelectCoursePanel = React.createClass({
                         <p>Kontakta mig på irkken om en kurs saknas eller har fel information.</p>
                     </div>
                     <div className="row center">
-                        <div className="input-field col s12 m6">
+                        <div className="input-field col s12 m6 offset-m3">
                             <input id="search-field" type="text" placeholder="Kurskod eller kursnamn"/>
                             <a className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">search</i></a>
                         </div>
