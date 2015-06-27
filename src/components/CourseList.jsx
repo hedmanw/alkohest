@@ -59,7 +59,7 @@ let CourseRow = React.createClass({
         }
         let pinButton;
         if (this.state.pinned) {
-            pinButton = <a className="btn disabled"><i className="material-icons">done</i></a>
+            pinButton = <a className="btn disabled-green"><i className="material-icons">done</i></a>
         }
         else {
             pinButton = <a onClick={this.handleClick} className="btn blue"><i className="material-icons">add</i></a>
