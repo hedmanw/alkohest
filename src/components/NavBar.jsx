@@ -5,7 +5,7 @@ let NavBar = React.createClass({
     render() {
         return (
         <nav className="grey darken-4" role="navigation">
-            <div className="nav-wrapper container"><a id="logo-container" href="#" className="brand-logo navbar-brand">Alkohest</a>
+            <div className="nav-wrapper container"><Link to="app" className="brand-logo navbar-brand">Alkohest</Link>
                 <ul className="right hide-on-med-and-down">
                     <NavTab to="select">Alla kurser</NavTab>
                 </ul>

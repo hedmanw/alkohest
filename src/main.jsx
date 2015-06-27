@@ -15,6 +15,7 @@ let App = React.createClass({
                 <NavBar/>
                 <RouteHandler/>
             </div>
+
         );
     }
 });

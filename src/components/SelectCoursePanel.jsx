@@ -27,7 +27,7 @@ let SelectCoursePanel = React.createClass({
                     <h1 className="header center orange-text">Sök efter kurser</h1>
                     <div className="row center">
                         <h5 className="header col s12 light">Leta reda på kurser och fäst (fest) dem på startsidan!</h5>
-                        <p>Kontakta mig på irkken om du upplever att en kurs saknas eller har fel länkar.</p>
+                        <p>Kontakta mig på irkken om en kurs saknas eller har fel information.</p>
                     </div>
                     <div className="row center">
                         <div className="input-field col s12 m6">
