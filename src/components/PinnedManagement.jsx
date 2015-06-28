@@ -6,10 +6,11 @@ let PinnedManagement = React.createClass({
     getInitialState() {
         return {
             courses: StorageClient.getPinned(),
-            data: []
+            data: [],
+            token: null
         };
     },
-    componentDidMount() {
+    updateData() {
         CourseClient.getByIds(this.state.courses,
             function(data) {
                 this.setState({data: data});
@@ -18,6 +19,19 @@ let PinnedManagement = React.createClass({
                 // Go cry.
             }
         );
+    },
+    componentDidMount() {
+        this.updateData();
+        let token = StorageClient.subscribe(function() {
+            this.setState({courses: StorageClient.getPinned()});
+            this.updateData();
+        }.bind(this));
+        this.setState({token: token});
+    },
+    componentWillUnmount() {
+        if (this.state.token) {
+            StorageClient.unsubscribe(this.state.token);
+        }
     },
     render() {
         if (this.state.data.length == 0) {
@@ -32,6 +46,9 @@ let PinnedManagement = React.createClass({
 });
 
 let CardDisplay = React.createClass({
+    handleClick() {
+        StorageClient.swapPinned();
+    },
     render() {
         let firstCard = <TinyCard code={this.props.data[0].courseCode} offset="offset-l1">{this.props.data[0].courseName}</TinyCard>;
         let swapButton;
@@ -40,7 +57,7 @@ let CardDisplay = React.createClass({
         if (this.props.data.length == 2) {
             swapButton = (<div className="col s12 m2">
                 <div className="aligner">
-                    <a className="btn-floating btn-large waves-effect waves-light red aligned-item" id="swap-button"><i className="material-icons">swap_horiz</i></a>
+                    <a onClick={this.handleClick} className="btn-floating btn-large waves-effect waves-light red aligned-item" id="swap-button"><i className="material-icons">swap_horiz</i></a>
                 </div>
             </div>);
             secondCard = <TinyCard code={this.props.data[1].courseCode}>{this.props.data[1].courseName}</TinyCard>;

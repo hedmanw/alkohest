@@ -29,6 +29,12 @@ class StorageClient {
         }
     }
 
+    // INVARIANT: getPinned().size() == 2
+    swapPinned() {
+        let pinned = this.getPinned();
+        this.setPinned(pinned[1]);
+    }
+
     subscribe(callback) {
         return PubSub.subscribe('pin', callback);
     }
