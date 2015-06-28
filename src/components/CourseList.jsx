@@ -6,7 +6,7 @@ let CourseList = React.createClass({
     render() {
         let courses = this.props.data.map(item => {
             return (
-                <CourseRow id={item.id} code={item.courseCode} homepage={item.courseUrl} fire={item.fireUrl}>{item.courseName}</CourseRow>
+                <CourseRow key={item.id} id={item.id} code={item.courseCode} homepage={item.courseUrl} fire={item.fireUrl}>{item.courseName}</CourseRow>
             )
         });
         return(

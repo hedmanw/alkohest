@@ -23,7 +23,7 @@ let FrontPanel = React.createClass({
     },
     render() {
         let courseCards = this.state.data.map(item => {
-            return <Card code={item.courseCode} homepage={item.courseUrl} fire={item.fireUrl}>{item.courseName}</Card>
+            return <Card key={item.id} code={item.courseCode} homepage={item.courseUrl} fire={item.fireUrl}>{item.courseName}</Card>
         });
         return (
             <div className="homepage-billboard">

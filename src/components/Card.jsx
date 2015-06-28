@@ -6,7 +6,7 @@ let Card = React.createClass({
             {link:this.props.homepage, desc:"Kurshemsida"},
             {link:this.props.fire, desc:"Fire"}
         ].filter(item => typeof item.link !== 'undefined').map(item => {
-                return (<a href={item.link}>{item.desc}</a>)
+                return (<a key={item.desc} href={item.link}>{item.desc}</a>)
         });
 
         return(
