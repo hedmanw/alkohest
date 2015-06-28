@@ -37,6 +37,10 @@
     .courses-section {
         margin-top: 250px;
     }
+
+    #swap-button {
+        margin-top: 30px;
+    }
 }
 
 .navbar-brand {
@@ -66,4 +70,14 @@
 pre {
     border: none;
     border-radius: 0px;
+}
+
+.aligner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aligned-item {
+    max-width: 50%;
 }
