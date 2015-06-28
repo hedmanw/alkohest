@@ -2,7 +2,7 @@
     background: url("/assets/homepage-bg.jpg") no-repeat scroll;
     background-size: cover;
     min-width: 100%;
-    min-height: 100%;
+    height: 100%;
 }
 
 .homepage-title:after {
@@ -34,10 +34,6 @@
 }
 
 @media (min-width: 768px) {
-    .courses-section {
-        margin-top: 250px;
-    }
-
     #swap-button {
         margin-top: 30px;
     }
@@ -56,14 +52,14 @@
 }
 
 .dotted-link {
-    color: #f1f1f1;
+    color: #fff;
     border-bottom: 1px dotted #f1f1f1;
     text-decoration: none;
 }
 
 .dotted-link:hover {
-    color: #4a90e2;
-    border-bottom: 1px dotted #4a90e2;
+    color: #03a9f4;
+    border-bottom: 1px dotted #2196F3;
     text-decoration: none;
 }
 
@@ -80,4 +76,11 @@ pre {
 
 .aligned-item {
     max-width: 50%;
+}
+
+.footer {
+    position:fixed;
+    left:0;
+    bottom:0;
+    width:100%;
 }

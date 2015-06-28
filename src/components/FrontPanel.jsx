@@ -30,11 +30,11 @@ let FrontPanel = React.createClass({
                 <div className="section">
                     <div className="container">
                         <div className="row center">
-                            <div className="header white-text homepage-title">supa?</div>
+                            <div className="header white-text homepage-title">plugga?</div>
                         </div>
                     </div>
                 </div>
-                <div className="section courses-section no-pad-bot">
+                <div className="section footer no-pad-bot">
                     <div className="container">
                         <div className="row">
                             {courseCards}

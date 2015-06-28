@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router";
 import StorageClient from "../clients/StorageClient.jsx";
 import CourseClient from "../clients/CourseClient.jsx";
 
@@ -68,7 +69,7 @@ let CardDisplay = React.createClass({
                 <div className="container">
                     <div className="row">
                         <div className="col s12 offset-l1">
-                            <h5 className="white-text">På din startsida nu:</h5>
+                            <h5 className="white-text">På din <Link to="app" className="dotted-link">startsida</Link> nu:</h5>
                         </div>
                     </div>
                     <div className="row">
