@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router";
-import StorageClient from "../clients/StorageClient.jsx";
-import CourseClient from "../clients/CourseClient.jsx";
+import StorageClient from "../clients/StorageClient.js";
+import CourseClient from "../clients/CourseClient.js";
 
 let PinnedManagement = React.createClass({
     getInitialState() {

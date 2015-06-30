@@ -1,7 +1,7 @@
 import React from "react";
 import CourseList from "./CourseList.jsx";
 import PinnedManagement from "./PinnedManagement.jsx";
-import CourseClient from "../clients/CourseClient.jsx";
+import CourseClient from "../clients/CourseClient.js";
 
 let SelectCoursePanel = React.createClass({
     getInitialState() {

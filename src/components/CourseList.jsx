@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Card.jsx";
-import StorageClient from "../clients/StorageClient.jsx";
+import StorageClient from "../clients/StorageClient.js";
 
 let CourseList = React.createClass({
     render() {

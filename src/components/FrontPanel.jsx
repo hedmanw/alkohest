@@ -1,8 +1,8 @@
 import React from "react";
 import {Link} from "react-router";
 import Card from "./Card.jsx";
-import CourseClient from "../clients/CourseClient.jsx";
-import StorageClient from "../clients/StorageClient.jsx";
+import CourseClient from "../clients/CourseClient.js";
+import StorageClient from "../clients/StorageClient.js";
 
 let FrontPanel = React.createClass({
     getInitialState() {
