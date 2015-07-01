@@ -11,6 +11,7 @@ let NavBar = React.createClass({
                 </ul>
 
                 <ul id="nav-mobile" className="side-nav">
+                    <Link to="app">Framsidan</Link>
                     <NavTab to="select">Alla kurser</NavTab>
                 </ul>
                 <a href="#" data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
