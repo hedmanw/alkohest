@@ -42,7 +42,9 @@ app.delete('/course/:course_id', function(req, res) {
     res.send(courseId + "\n");
 });
 
-let server = app.listen(8080, function () {
+let port = process.argv[2] || 8080;
+
+let server = app.listen(port, function () {
     let host = server.address().address;
     let port = server.address().port;
 
