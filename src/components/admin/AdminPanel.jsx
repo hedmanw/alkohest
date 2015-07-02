@@ -22,9 +22,7 @@ let AdminPanel = React.createClass({
                         <AdminCourseList/>
                     </div>
                 </div>
-
             </div>
-
         );
     }
 });
