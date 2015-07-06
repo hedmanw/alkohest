@@ -20,12 +20,16 @@ app.get('/course', function(req, res) {
 });
 
 app.post('/course', function(req, res) {
-    let courseCode = req.body.courseCode;
-    let courseName = req.body.courseName;
-    let courseUrl = req.body.courseUrl;
-    let fireUrl = req.body.fireUrl;
-
-    res.send("Yeah man, " + courseCode + ": " + courseName + "\n");
+    if (isAuthorized(req)) {
+        let courseCode = req.body.courseCode;
+        let courseName = req.body.courseName;
+        let courseUrl = req.body.courseUrl;
+        let fireUrl = req.body.fireUrl;
+        res.send("Yeah man, " + courseCode + ": " + courseName + "\n");
+    }
+    else {
+        res.send("Unauthorized.");
+    }
 });
 
 app.get('/course/:course_id', function(req, res) {
@@ -41,6 +45,11 @@ app.delete('/course/:course_id', function(req, res) {
     let courseId = req.params.course_id;
     res.send(courseId + "\n");
 });
+
+let isAuthorized(req) {
+    let apiKey = req.get('x-api-key');
+    return (typeof apiKey !== 'undefined' && apiKey === 'hestnyckel');
+}
 
 let port = process.argv[2] || 8080;
 
