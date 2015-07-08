@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import courses from './model/course.js'
+import api from './api.js'
 
 let app = express();
 
@@ -9,47 +9,7 @@ app.use(express.static(__dirname + '/build'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/course', function(req, res) {
-    let ids = req.query.ids;
-    if (ids) {
-        res.send(courses.getByIds(JSON.parse(ids)))
-    }
-    else {
-        res.send(courses.getAll())
-    }
-});
-
-app.post('/course', function(req, res) {
-    if (isAuthorized(req)) {
-        let courseCode = req.body.courseCode;
-        let courseName = req.body.courseName;
-        let courseUrl = req.body.courseUrl;
-        let fireUrl = req.body.fireUrl;
-        res.send("Yeah man, " + courseCode + ": " + courseName + "\n");
-    }
-    else {
-        res.send("Unauthorized.");
-    }
-});
-
-app.get('/course/:course_id', function(req, res) {
-    res.send(courses.getById(req.params.course_id));
-});
-
-app.post('/course/:course_id', function(req, res) {
-    let courseId = req.params.course_id;
-    res.send(courseId + "\n");
-});
-
-app.delete('/course/:course_id', function(req, res) {
-    let courseId = req.params.course_id;
-    res.send(courseId + "\n");
-});
-
-let isAuthorized(req) {
-    let apiKey = req.get('x-api-key');
-    return (typeof apiKey !== 'undefined' && apiKey === 'hestnyckel');
-}
+api(app);
 
 let port = process.argv[2] || 8080;
 
