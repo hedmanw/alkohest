@@ -20,7 +20,7 @@ function registerPaths(app) {
             res.send("Yeah man, " + courseCode + ": " + courseName + "\n");
         }
         else {
-            res.status(401).send("Unauthorized.");
+            res.status(401).send("Unauthorized.\n");
         }
     });
 
@@ -34,7 +34,7 @@ function registerPaths(app) {
             res.send(courseId + "\n");
         }
         else {
-            res.status(401).send("Unauthorized.");
+            res.status(401).send("Unauthorized.\n");
         }
     });
 
@@ -44,13 +44,13 @@ function registerPaths(app) {
             res.send(courseId + "\n");
         }
         else {
-            res.status(401).send("Unauthorized.");
+            res.status(401).send("Unauthorized.\n");
         }
     });
 
     function isAuthorized(req) {
         let apiKey = req.get('x-api-key');
-        return (typeof apiKey !== 'undefined' && apiKey === 'hestnyckel');
+        return apiKey === 'hestnyckel';
     }
 }
 
