@@ -17,7 +17,7 @@ function registerPaths(app) {
             let courseName = req.body.courseName;
             let courseUrl = req.body.courseUrl;
             let fireUrl = req.body.fireUrl;
-            res.send("Yeah man, " + courseCode + ": " + courseName + "\n");
+            res.send("This is totally a location header!\n");
         }
         else {
             res.status(401).send("Unauthorized.\n");

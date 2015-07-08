@@ -1,6 +1,15 @@
 import React from "react";
+import CourseClient from "../../clients/CourseClient.js";
 
 let CourseEditor = React.createClass({
+    handleClick() {
+        CourseClient.create({
+            courseCode: "ASDF",
+            courseName: "ASDF ASDF",
+            courseUrl: "http://alkohest.se",
+            fireUrl: "http://alkohest.se"
+        });
+    },
     render() {
         return (
             <div className="row">
