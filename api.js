@@ -21,7 +21,11 @@ function registerPaths(app) {
             let courseName = req.body.courseName;
             let courseUrl = req.body.courseUrl;
             let fireUrl = req.body.fireUrl;
-            res.send("This is totally a location header!\n");
+            courses.create(courseCode, courseName, courseUrl, fireUrl, (course) => {
+                res.send(course.id + "");
+            }, (e) => {
+                res.status(500).send(e.errors);
+            });
         }
         else {
             res.status(401).send("Unauthorized.\n");
@@ -35,7 +39,15 @@ function registerPaths(app) {
     app.post('/course/:course_id', function(req, res) {
         if (isAuthorized(req)) {
             let courseId = req.params.course_id;
-            res.send(courseId + "\n");
+            let courseCode = req.body.courseCode;
+            let courseName = req.body.courseName;
+            let courseUrl = req.body.courseUrl;
+            let fireUrl = req.body.fireUrl;
+            courses.updateCourse(courseId, courseCode, courseName, courseUrl, fireUrl, (course) => {
+                res.send(course.id + "")
+            }, (e) => {
+                res.status(500).send(e.errors);
+            });
         }
         else {
             res.status(401).send("Unauthorized.\n");
@@ -45,7 +57,11 @@ function registerPaths(app) {
     app.delete('/course/:course_id', function(req, res) {
         if (isAuthorized(req)) {
             let courseId = req.params.course_id;
-            res.send(courseId + "\n");
+            courses.deleteCourse(id, (old) => {
+                res.send();
+            }, (e) => {
+                res.status(500).send(e.errors);
+            });
         }
         else {
             res.status(401).send("Unauthorized.\n");
@@ -54,7 +70,8 @@ function registerPaths(app) {
 
     function isAuthorized(req) {
         let apiKey = req.get('x-api-key');
-        return apiKey === 'hestnyckel';
+        //return apiKey === 'hestnyckel';
+        return true;
     }
 }
 

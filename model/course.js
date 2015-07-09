@@ -20,10 +20,12 @@ class CourseData {
             },
             courseUrl: {
                 type: Sequelize.STRING,
+                isUrl: true,
                 allowNull: false
             },
             fireUrl: {
-                type: Sequelize.STRING
+                type: Sequelize.STRING,
+                isUrl: true
             }
         });
 
@@ -51,6 +53,26 @@ class CourseData {
                 }
             }
         }).then(res);
+    }
+
+    create(courseCode, courseName, courseUrl, fireUrl, res, req) {
+        Course.create({courseCode: courseCode, courseName: courseName, courseUrl: courseUrl, fireUrl: fireUrl}).then(res, req);
+    }
+
+    updateCourse(id, courseCode, courseName, courseUrl, fireUrl, res, req) {
+        Course.update({courseCode: courseCode, courseName: courseName, courseUrl: courseUrl, fireUrl: fireUrl}, {
+            where: {
+                id: id
+            }
+        }).then(res, req);
+    }
+
+    deleteCourse(id, res, req) {
+        Course.destroy({
+            where: {
+                id: id
+            }
+        }).then(res, req);
     }
 }
 

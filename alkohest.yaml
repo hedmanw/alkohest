@@ -40,10 +40,10 @@ paths:
       responses:
         200:
           description: Created successfully. Returns URI.
-        302:
-          description: Course already exists. Returns URI.
         401:
           description: Unauthorized.
+        409:
+          description: Duplicate.
         default:
           description: Unexpected error.
           schema:
@@ -106,7 +106,7 @@ paths:
         - Courses
       responses:
         200:
-          description: Created successfully.
+          description: Edited successfully.
         401:
           description: Unauthorized.
         404:
