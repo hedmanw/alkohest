@@ -1,17 +1,43 @@
+import Sequelize from "sequelize";
+
+var Course;
+
 class CourseData {
-    getAll() {
-        return [
-            {id: "1", courseCode: "TDA357", courseName: "Databaser", courseUrl: "http://www.cse.chalmers.se/edu/course/TDA357/VT2015/", fireUrl: "https://xdat09.ce.chalmers.se/databases/login"},
-            {id: "2", courseCode: "TDA517", courseName: "Kommunikation engelska och ingenjörskompetens", courseUrl: "https://pingpong.chalmers.se/courseId/4887/content.do?id=2168510"},
-            {id: "3", courseCode: "DATX02", courseName: "Kandidatarbete D&IT", courseUrl: "https://pingpong.chalmers.se/launchCourse.do?id=4424"},
-            {id: "4", courseCode: "MVE045", courseName: "Matematisk analys", courseUrl: "https://www.youtube.com/watch?v=xrIjfIjssLE"}
-        ]
+    schemaDefinition(sequelize) {
+        Course = sequelize.define('course', {
+            id: {
+                type: Sequelize.INTEGER,
+                autoIncrement: true,
+                primaryKey: true
+            },
+            courseCode: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
+            courseName: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
+            courseUrl: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
+            fireUrl: {
+                type: Sequelize.STRING
+            }
+        });
+
+        Course.sync();
     }
-    getById(id) {
-        return this.getAll().filter(item => item.id === id)[0];
+
+    getAll(res) {
+        Course.findAll().then(res);
     }
-    getByIds(ids) {
-        return ids.map(id => this.getById(id))
+    getById(id, res) {
+        Course.findById(id).then(res);
+    }
+    getByIds(ids, res) {
+        return ids.map(id => this.getById(id, res))
     }
 }
 

@@ -1,13 +1,17 @@
 import courses from './model/course.js'
 
+function createSchemata(sequelize) {
+    courses.schemaDefinition(sequelize)
+}
+
 function registerPaths(app) {
     app.get('/course', function(req, res) {
         let ids = req.query.ids;
         if (ids) {
-            res.send(courses.getByIds(JSON.parse(ids)))
+            courses.getByIds(JSON.parse(ids), (courses) => res.send(courses));
         }
         else {
-            res.send(courses.getAll())
+            courses.getAll((courses) => res.send(courses));
         }
     });
 
@@ -25,7 +29,7 @@ function registerPaths(app) {
     });
 
     app.get('/course/:course_id', function(req, res) {
-        res.send(courses.getById(req.params.course_id));
+        courses.getById(req.params.course_id, (course) => res.send(course));
     });
 
     app.post('/course/:course_id', function(req, res) {
@@ -54,4 +58,4 @@ function registerPaths(app) {
     }
 }
 
-export default registerPaths;
+export default {createSchemata, registerPaths};
