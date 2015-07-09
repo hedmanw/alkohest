@@ -11,7 +11,7 @@ let AdminCourseRow = React.createClass({
     },
     render() {
         let fire;
-        if (typeof this.props.fire !== 'undefined') {
+        if (this.props.fire) {
             fire = <a href={this.props.fire} title="Fire"><i className="material-icons">file_upload</i></a>;
         }
 

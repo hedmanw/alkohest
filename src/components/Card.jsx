@@ -5,7 +5,7 @@ let Card = React.createClass({
         let buttons = [
             {link:this.props.homepage, desc:"Kurshemsida"},
             {link:this.props.fire, desc:"Fire"}
-        ].filter(item => typeof item.link !== 'undefined').map(item => {
+        ].filter(item => item.link).map(item => {
                 return (<a key={item.desc} href={item.link}>{item.desc}</a>)
         });
 

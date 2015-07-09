@@ -18,7 +18,7 @@ class CourseClient {
         $.ajax({
             url: HEST_API + urlExtension,
             dataType: 'json',
-            cache: false,
+            cache: true,
             success: function(data) {
                 resolve(data);
             },
