@@ -33,7 +33,14 @@ function registerPaths(app) {
     });
 
     app.get('/course/:course_id', function(req, res) {
-        courses.getById(req.params.course_id, (course) => res.send(course));
+        var courseId = req.params.course_id;
+        courses.getById(courseId, (course) => {
+            if (course) {
+                res.send(course)
+            } else {
+                res.status(404).send("Could not find a course with courseId=" + courseId)
+            }
+        });
     });
 
     app.post('/course/:course_id', function(req, res) {

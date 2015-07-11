@@ -43,7 +43,10 @@ class CourseData {
         Course.findAll().then(res);
     }
     getById(id, res) {
-        Course.findById(id).then(res);
+        Course.findOne({
+            where: {id: id},
+            attributes: ['id', 'courseCode', 'courseName', 'courseUrl', 'fireUrl']
+        }).then(res);
     }
     getByIds(ids, res) {
         Course.findAll({
