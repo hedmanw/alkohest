@@ -15,7 +15,18 @@ function registerPaths(app) {
         }
     });
 
-    app.post('/course', function(req, res) {
+    app.get('/course/:course_id', function(req, res) {
+        var courseId = req.params.course_id;
+        courses.getById(courseId, (course) => {
+            if (course) {
+                res.send(course)
+            } else {
+                res.status(404).send("Could not find a course with courseId=" + courseId)
+            }
+        });
+    });
+
+    app.post('/admin/course', function(req, res) {
         if (isAuthorized(req)) {
             let courseCode = req.body.courseCode;
             let courseName = req.body.courseName;
@@ -32,18 +43,7 @@ function registerPaths(app) {
         }
     });
 
-    app.get('/course/:course_id', function(req, res) {
-        var courseId = req.params.course_id;
-        courses.getById(courseId, (course) => {
-            if (course) {
-                res.send(course)
-            } else {
-                res.status(404).send("Could not find a course with courseId=" + courseId)
-            }
-        });
-    });
-
-    app.post('/course/:course_id', function(req, res) {
+    app.post('/admin/course/:course_id', function(req, res) {
         if (isAuthorized(req)) {
             let courseId = req.params.course_id;
             let courseCode = req.body.courseCode;
@@ -61,7 +61,7 @@ function registerPaths(app) {
         }
     });
 
-    app.delete('/course/:course_id', function(req, res) {
+    app.delete('/admin/course/:course_id', function(req, res) {
         if (isAuthorized(req)) {
             let courseId = req.params.course_id;
             courses.deleteCourse(id, (old) => {

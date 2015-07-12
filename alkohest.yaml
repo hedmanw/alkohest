@@ -4,7 +4,7 @@ info:
   description: Unleash your horse powers! 
   version: "1.0.0"
 # the domain of the service
-host: api.alkohest.se
+host: alkohest.se
 # array of all schemes that your API supports
 schemes:
   - http
@@ -31,10 +31,47 @@ paths:
           description: Unexpected error.
           schema:
             $ref: '#/definitions/Error'
+  /course/{id}:
+    get:
+      summary: Get a specific course
+      description: |
+        Get contents of a specific course by id. 
+      tags:
+        - Courses
+      responses:
+        200:
+          description: A specific, requested course
+          schema:
+            $ref: '#/definitions/Course'
+        404:
+          description: Course not found.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      parameters:
+        - name: id
+          in: path
+          description: Id of course
+          required: true
+          type: string
+  /admin/course:
+    get:
+      summary: Get all courses with all information.
+      description: Get all courses with all their metadata.
+      tags:
+       - Courses
+       - Admin
+      responses:
+        200:
+          description: Returns list of courses.
+          schema:
+            $ref: '#/definitions/InternalCourse'
+        401: Unauthorized.
     post:
       summary: Create a new course
       description: |
-        Create a new course with specified parameters. 
+        Create a new course with specified parameters.
       tags:
         - Courses
       responses:
@@ -74,30 +111,21 @@ paths:
           description: Fire url
           required: false
           type: string
-  /course/{id}:
+  /admin/course/{id}:
     get:
-      summary: Get a specific course
+      summary: Get a course, by id, with all information.
       description: |
-        Get contents of a specific course by id. 
+        Get a specific course with all of its metadata.
       tags:
-        - Courses
+       - Courses
+       - Admin
       responses:
         200:
-          description: A specific, requested course
+          description: Returns a course.
           schema:
-            $ref: '#/definitions/Course'
-        404:
-          description: Course not found.
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      parameters:
-        - name: id
-          in: path
-          description: Id of course
-          required: true
-          type: string
+            $ref: '#/definitions/InternalCourse'
+        401: Unauthorized.
+        404: Course not found.
     post:
       summary: Change course details
       description: |
@@ -174,10 +202,20 @@ paths:
           description: Id of the course to be deleted
           required: true
           type: string
+  /stats:
+    get:
+      summary: Get some statistics.
+      description: |
+        Get some statistics about courses. Schema TBD.
+      tags:
+       - Stats
+      responses:
+        200:
+          descripiton: OK. Schema TBD.
 definitions:
-  Course:
+  InternalCourse:
     properties:
-      course_id:
+      id:
         type: integer
         description: Course id.
       course_code:
@@ -189,7 +227,30 @@ definitions:
       course_url:
         type: string
         description: Course homepage.
-      fire:
+      fire_url:
+        type: string
+        description: Fire page.
+      last_added:
+        type: string
+        descripiton: Unix timestamp of when the course was last placed on a frontpage.
+      times_added:
+        type: integer
+        description: Number of times the course has been added to a frontpage.
+  ExtCourse:
+    properties:
+      id:
+        type: integer
+        description: Course id.
+      course_code:
+        type: string
+        description: Course code.
+      course_name:
+        type: string
+        description: Course name.
+      course_url:
+        type: string
+        description: Course homepage.
+      fire_url:
         type: string
         description: Fire page.
   Error:

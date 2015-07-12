@@ -1,4 +1,5 @@
 let HEST_API = "http://localhost:8080/";
+let ADMIN_API = "http://localhost:8080/admin/";
 
 class CourseClient {
 
@@ -43,7 +44,7 @@ class CourseClient {
 
     postWithAuth(urlExtension, body, resolve, reject) {
         $.ajax({
-            url: HEST_API + urlExtension,
+            url: ADMIN_API + urlExtension,
             type: 'post',
             data: body,
             headers: {
@@ -61,7 +62,7 @@ class CourseClient {
 
     deleteWithAuth(urlExtension, resolve, reject) {
         $.ajax({
-            url: HEST_API + urlExtension,
+            url: ADMIN_API + urlExtension,
             type: 'delete',
             headers: {
                 "x-api-key": 'hestnyckel'
