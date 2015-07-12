@@ -30,16 +30,16 @@ class CourseClient {
         });
     }
 
-    create(course) {
-        this.postWithAuth("course", course, null, null);
+    create(course, resolve, reject) {
+        this.postWithAuth("course", course, resolve, reject);
     }
 
-    editCourse(course) {
-        this.postWithAuth("course/" + course.id, null, null);
+    editCourse(courseId, data, resolve, reject) {
+        this.postWithAuth("course/" + courseId, data, resolve, reject);
     }
 
-    deleteCourse(course) {
-        this.deleteWithAuth("course/" + course.id, null, null);
+    deleteCourse(courseId, resolve, reject) {
+        this.deleteWithAuth("course/" + courseId, resolve, reject);
     }
 
     postWithAuth(urlExtension, body, resolve, reject) {
