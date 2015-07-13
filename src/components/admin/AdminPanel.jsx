@@ -1,22 +1,16 @@
 import React from "react";
-import {Link} from "react-router";
+import {Link, RouteHandler} from "react-router";
 import AdminCourseList from "./AdminCourseList.jsx";
 import CourseEditor from "./CourseEditor.jsx";
 
 let AdminPanel = React.createClass({
     render() {
         return (
-            <div>
-                <div className="section" id="index-banner">
-                    <div className="container">
-                        <h1 className="header purple-text">Administrera mera...</h1>
-                        <Link to="create" className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">add</i></Link>
-                    </div>
-                </div>
-                <div className="section">
-                    <div className="container">
-                        <AdminCourseList/>
-                    </div>
+            <div className="section">
+                <div className="container">
+                    <Link to="admin" className="btn-floating btn-large waves-effect waves-light blue"><i className="material-icons">home</i></Link>
+                    <Link to="create" className="btn-floating btn-large waves-effect waves-light teal"><i className="material-icons">add</i></Link>
+                    <RouteHandler/>
                 </div>
             </div>
         );

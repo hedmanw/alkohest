@@ -25,21 +25,23 @@ let AdminCourseList = React.createClass({
             )
         });
         return(
-            <table className="striped">
-                <thead>
+            <div>
+                <h1 className="header purple-text">Administrera mera...</h1>
+
+                <table className="striped">
+                    <thead>
                     <tr>
                         <th data-field="id">Kurskod</th>
                         <th data-field="name">Kursnamn</th>
                         <th data-field="links">Länkar</th>
-                        <th data-field="timesadded"># Tillagd</th>
-                        <th data-field="lastadded">Senast tillagd</th>
                         <th data-field="manage">Administrera</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     {courses}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         )
     }
 });
