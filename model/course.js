@@ -13,6 +13,7 @@ class CourseData {
             },
             courseCode: {
                 type: Sequelize.STRING,
+                unique: true,
                 allowNull: false
             },
             courseName: {

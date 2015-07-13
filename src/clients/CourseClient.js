@@ -24,7 +24,7 @@ class CourseClient {
                 resolve(data);
             },
             error: function(xhr, status, err) {
-                console.error("Cannot GET /" + urlExtension, status, err.toString());
+                console.error("Cannot GET /" + urlExtension, status, xhr.responseJSON);
                 reject()
             }
         });
@@ -54,8 +54,8 @@ class CourseClient {
                 resolve(data)
             },
             error: function(xhr, status, err) {
-                console.error("Cannot POST /" + urlExtension, status, err.toString());
-                reject(status);
+                console.error("Cannot POST /" + urlExtension, status, xhr.responseJSON);
+                reject(xhr.responseJSON);
             }
         });
     }
@@ -71,8 +71,8 @@ class CourseClient {
                 resolve(data)
             },
             error: function(xhr, status, err) {
-                console.error("Could not DELETE /" + urlExtension, status, err.toString());
-                reject(status);
+                console.error("Could not DELETE /" + urlExtension, status, xhr.responseJSON);
+                reject(xhr.responseJSON);
             }
         });
     }

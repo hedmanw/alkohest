@@ -3,6 +3,7 @@ import Router from "react-router";
 import SelectCoursePanel from "./components/SelectCoursePanel.jsx";
 import FrontPanel from "./components/FrontPanel.jsx";
 import AdminPanel from "./components/admin/AdminPanel.jsx";
+import CreatePanel from "./components/admin/CreatePanel.jsx";
 import NavBar from "./components/NavBar.jsx";
 
 let DefaultRoute = Router.DefaultRoute;
@@ -26,6 +27,7 @@ let routes = (
         <DefaultRoute handler={FrontPanel}/>
         <Route name="select" path="select" handler={SelectCoursePanel} title="Alla kurser" />
         <Route name="admin" path="admin" handler={AdminPanel} title="Administrera" />
+        <Route name="create" path="admin/create" handler={CreatePanel}/>
     </Route>
 );
 
