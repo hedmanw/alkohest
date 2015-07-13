@@ -1,4 +1,5 @@
 import Sequelize from "sequelize";
+import bootstrapData from "./courseBootstrap.json";
 
 var Course;
 
@@ -31,10 +32,7 @@ class CourseData {
 
         //Course.sync();
         Course.sync({force: true}).then(() => {
-            Course.create({courseCode: "TDA357", courseName: "Databaser", courseUrl: "http://www.cse.chalmers.se/edu/course/TDA357/VT2015/", fireUrl: "https://xdat09.ce.chalmers.se/databases/login"});
-            Course.create({courseCode: "TDA517", courseName: "Kommunikation engelska och ingenjörskompetens", courseUrl: "https://pingpong.chalmers.se/courseId/4887/content.do?id=2168510"});
-            Course.create({courseCode: "DATX02", courseName: "Kandidatarbete D&IT", courseUrl: "https://pingpong.chalmers.se/launchCourse.do?id=4424"});
-            Course.create({courseCode: "MVE045", courseName: "Matematisk analys", courseUrl: "https://www.youtube.com/watch?v=xrIjfIjssLE"});
+            bootstrapData.forEach((course) => Course.create({courseCode: course.courseCode, courseName: course.courseName, courseUrl: course.courseUrl, fireUrl: course.fireUrl}));
             return true;
         });
     }

@@ -1,0 +1,6 @@
+[
+  {"courseCode": "EDA433", "courseName": "Grundläggande datorteknik", "courseUrl": "https://www.youtube.com/watch?v=xrIjfIjssLE"},
+  {"courseCode": "TDA545", "courseName": "Objektorienterad programvaruutveckling", "courseUrl": "https://www.youtube.com/watch?v=xrIjfIjssLE", "fireUrl": "https://www.youtube.com/watch?v=xrIjfIjssLE"},
+  {"courseCode": "TDA550", "courseName": "Objektorienterad programvaruutveckling, fortsättningskurs", "courseUrl": "https://www.youtube.com/watch?v=xrIjfIjssLE", "fireUrl": "https://www.youtube.com/watch?v=xrIjfIjssLE"},
+  {"courseCode": "TMV200", "courseName": "Diskret matematik", "courseUrl": "https://www.youtube.com/watch?v=xrIjfIjssLE"}
+]
