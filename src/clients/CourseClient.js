@@ -1,5 +1,7 @@
-let HEST_API = "http://localhost:8080/";
-let ADMIN_API = "http://localhost:8080/admin/";
+import config from "./config.json";
+
+let HEST_API = config.apiHost;
+let ADMIN_API = HEST_API + "admin/";
 
 class CourseClient {
 
