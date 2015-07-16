@@ -34,21 +34,18 @@ let CourseEditor = React.createClass({
         }
     },
     delete() {
-        if (this.props.course.id) {
             CourseClient.deleteCourse(this.props.course.id, (data) => {
                 this.setState({response: data})
             }, (err) => {
                 this.setState({response: err})
             });
-        }
-        else {
-            // TODO: Link to back
-        }
-    },
-    changeCode(event) {
-        this.setState({courseCode: event.target.value});
     },
     render() {
+        let deleteButton;
+        if (this.props.course.id) {
+            deleteButton = <a onClick={this.delete} className="btn red">Släng</a>;
+        }
+
         return (
             <div>
                 <div className="row">
@@ -72,17 +69,19 @@ let CourseEditor = React.createClass({
                         <input id="courseUrl" ref="courseUrl" type="url" className="validate" defaultValue={this.props.course.courseUrl}/>
                         <label className="active" htmlFor="courseUrl">Course homepage</label>
                     </div>
+                    <a href={this.props.course.courseUrl} target="_blank" className="btn-floating btn-large purple"><i className="material-icons">arrow_forward</i></a>
                 </div>
                 <div className="row">
                     <div className="input-field col m6">
                         <input id="fireUrl" ref="fireUrl" type="url" className="validate" defaultValue={this.props.course.fireUrl}/>
                         <label className="active" htmlFor="fireUrl">Fire url</label>
                     </div>
+                    <a href={this.props.course.fireUrl} target="_blank" className="btn-floating btn-large orange"><i className="material-icons">arrow_forward</i></a>
                 </div>
                 <div className="row">
                         <div className="col m6">
                         <a onClick={this.approve} className="btn green">Skapa</a>
-                        <a onClick={this.delete} className="btn red">Släng</a>
+                        {deleteButton}
                         <p>{this.state.response}</p>
                     </div>
                 </div>
