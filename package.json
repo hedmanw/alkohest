@@ -10,8 +10,8 @@
     "test": "mochify",
     "test-watch": "mochify --watch",
     "cover": "node cover.js && cat lcov.info | coveralls && rm lcov.info",
-    "start": "babel-node server.js 8080",
-    "deploy": "babel-node server.js 80",
+    "start": "babel-node server.js",
+    "deploy": "babel-node server.js",
     "clean": "rm build/app.js"
   },
   "repository": {

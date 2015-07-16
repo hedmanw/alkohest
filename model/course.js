@@ -31,11 +31,11 @@ class CourseData {
             }
         });
 
-        //Course.sync();
-        Course.sync({force: true}).then(() => {
-            bootstrapData.forEach((course) => Course.create({courseCode: course.courseCode, courseName: course.courseName, courseUrl: course.courseUrl, fireUrl: course.fireUrl}));
-            return true;
-        });
+        Course.sync();
+        //Course.sync({force: true}).then(() => {
+        //    bootstrapData.forEach((course) => Course.create({courseCode: course.courseCode, courseName: course.courseName, courseUrl: course.courseUrl, fireUrl: course.fireUrl}));
+        //    return true;
+        //});
     }
 
     getAll(res) {

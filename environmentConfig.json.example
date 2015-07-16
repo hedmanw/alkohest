@@ -1,0 +1,5 @@
+{
+  "bindPort": "8080",
+  "databaseUser": "root",
+  "databasePassword": ""
+}
