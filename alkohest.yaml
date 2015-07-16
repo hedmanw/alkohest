@@ -75,7 +75,7 @@ paths:
       tags:
         - Courses
       responses:
-        200:
+        201:
           description: Created successfully. Returns URI.
         401:
           description: Unauthorized.
@@ -181,7 +181,7 @@ paths:
       tags:
         - Courses
       responses:
-        200:
+        204:
           description: Deleted successfully.
         401:
           description: Unauthorized.

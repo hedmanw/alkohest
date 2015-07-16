@@ -33,7 +33,7 @@ function registerPaths(app) {
             let courseUrl = req.body.courseUrl;
             let fireUrl = req.body.fireUrl;
             courses.create(courseCode, courseName, courseUrl, fireUrl, (course) => {
-                res.send(course.id + "");
+                res.status(201).send(course.id + "");
             }, (e) => {
                 res.status(500).send(e.errors);
             });
@@ -64,8 +64,8 @@ function registerPaths(app) {
     app.delete('/admin/course/:course_id', function(req, res) {
         if (isAuthorized(req)) {
             let courseId = req.params.course_id;
-            courses.deleteCourse(id, (old) => {
-                res.send();
+            courses.deleteCourse(courseId, (old) => {
+                res.status(204).send();
             }, (e) => {
                 res.status(500).send(e.errors);
             });

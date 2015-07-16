@@ -5,11 +5,7 @@ import CourseClient from "../../clients/CourseClient.js";
 let CourseEditor = React.createClass({
     getInitialState() {
         return {
-            response: null,
-            courseCode: this.props.course.courseCode,
-            courseName: this.props.course.courseName,
-            courseUrl: this.props.course.courseUrl,
-            fireUrl: this.props.course.fireUrl
+            response: null
         };
     },
     approve() {
@@ -39,7 +35,11 @@ let CourseEditor = React.createClass({
     },
     delete() {
         if (this.props.course.id) {
-            CourseClient.deleteCourse(this.props.course.id);
+            CourseClient.deleteCourse(this.props.course.id, (data) => {
+                this.setState({response: data})
+            }, (err) => {
+                this.setState({response: err})
+            });
         }
         else {
             // TODO: Link to back
@@ -53,29 +53,29 @@ let CourseEditor = React.createClass({
             <div>
                 <div className="row">
                     <div className="input-field col m2">
-                        <input disabled id="dbId" type="text" className="validate" value={this.props.course.id}/>
+                        <input disabled id="dbId" type="text" className="validate" defaultValue={this.props.course.id}/>
                         <label className="active" htmlFor="dbId">ID</label>
                     </div>
                     <div className="input-field col m4">
-                        <input id="courseCode" ref="courseCode" type="text" className="validate" value={this.state.courseCode} onChange={this.changeCode}/>
+                        <input id="courseCode" ref="courseCode" type="text" className="validate" defaultValue={this.props.course.courseCode}/>
                         <label className="active" htmlFor="courseCode">Course code</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col m6">
-                        <input id="courseName" ref="courseName" type="text" className="validate" value={this.state.courseName}/>
+                        <input id="courseName" ref="courseName" type="text" className="validate" defaultValue={this.props.course.courseName}/>
                         <label className="active" htmlFor="courseName">Course name</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col m6">
-                        <input id="courseUrl" ref="courseUrl" type="url" className="validate" value={this.state.courseUrl}/>
+                        <input id="courseUrl" ref="courseUrl" type="url" className="validate" defaultValue={this.props.course.courseUrl}/>
                         <label className="active" htmlFor="courseUrl">Course homepage</label>
                     </div>
                 </div>
                 <div className="row">
                     <div className="input-field col m6">
-                        <input id="fireUrl" ref="fireUrl" type="url" className="validate" value={this.state.fireUrl}/>
+                        <input id="fireUrl" ref="fireUrl" type="url" className="validate" defaultValue={this.props.course.fireUrl}/>
                         <label className="active" htmlFor="fireUrl">Fire url</label>
                     </div>
                 </div>

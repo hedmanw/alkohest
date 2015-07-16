@@ -5,7 +5,7 @@ import CourseClient from "../../clients/CourseClient.js";
 let EditPanel = React.createClass({
     getInitialState() {
         return {
-            course: {}
+            course: null
         };
     },
 
@@ -17,12 +17,17 @@ let EditPanel = React.createClass({
     },
 
     render() {
-        return (
-            <div>
-                <h1 className="header purple-text">Ändra på gammal makapär</h1>
-                <CourseEditor course={this.state.course}/>
-            </div>
-        );
+        if (this.state.course) {
+            return (
+                <div>
+                    <h1 className="header purple-text">Ändra på gammal makapär</h1>
+                    <CourseEditor course={this.state.course}/>
+                </div>
+            );
+        }
+        else {
+            return(<p>Tomt.</p>);
+        }
     }
 });
 
