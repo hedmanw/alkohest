@@ -50,7 +50,7 @@ class CourseClient {
             type: 'post',
             data: body,
             headers: {
-                "x-api-key": 'hestnyckel'
+                "x-api-key": window.localStorage.getItem('api-key')
             },
             success: function (data) {
                 resolve(data)
@@ -67,7 +67,7 @@ class CourseClient {
             url: ADMIN_API + urlExtension,
             type: 'delete',
             headers: {
-                "x-api-key": 'hestnyckel'
+                "x-api-key": window.localStorage.getItem('api-key')
             },
             success: function (data) {
                 resolve(data)

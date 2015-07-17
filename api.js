@@ -1,4 +1,5 @@
 import courses from './model/course.js'
+import appConf from "./environmentConfig.json"
 
 function createSchemata(sequelize) {
     courses.schemaDefinition(sequelize)
@@ -77,8 +78,7 @@ function registerPaths(app) {
 
     function isAuthorized(req) {
         let apiKey = req.get('x-api-key');
-        //return apiKey === 'hestnyckel';
-        return true;
+        return apiKey === appConf.apiKey;
     }
 }
 
