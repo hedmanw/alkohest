@@ -84,3 +84,14 @@ pre {
     bottom:30px;
     width:100%;
 }
+
+#search-field {
+    font-size: 30px;
+    font-style: italic;
+    text-align: center;
+}
+
+#search-field:focus {
+    border-bottom: 1px solid #2196F3;
+    box-shadow: 0 1px 0 0 #000;
+}
