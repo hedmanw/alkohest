@@ -9,8 +9,10 @@ let Card = React.createClass({
                 return (<a key={item.desc} href={item.link}>{item.desc}</a>)
         });
 
+        let divClasses = "col s12 m" + (12/this.props.count);
+
         return(
-            <div className="col s12 m6">
+            <div className={divClasses}>
                 <div className="card light-blue darken-1">
                     <div className="card-content white-text">
                         <span className="card-title">{this.props.code}</span>
