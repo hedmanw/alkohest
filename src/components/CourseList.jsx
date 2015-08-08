@@ -45,7 +45,7 @@ let CourseRow = React.createClass({
         }
     },
     handleClick() {
-        StorageClient.setPinned(this.props.id)
+        StorageClient.addPinned(this.props.id)
     },
     render() {
         let fire;
