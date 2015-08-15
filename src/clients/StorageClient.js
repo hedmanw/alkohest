@@ -17,7 +17,7 @@ class StorageClient {
                     this.saveState([id, head]);
                 }
             }
-            PubSub.publish('pin')
+            PubSub.publish('pin');
         }
     }
 
@@ -26,7 +26,8 @@ class StorageClient {
     }
 
     removePinned(id) {
-        this.saveState(this.getPinned().filter(item => item !== id))
+        this.saveState(this.getPinned().filter(item => item !== id));
+        PubSub.publish('pin');
     }
 
     getPinned() {

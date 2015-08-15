@@ -87,7 +87,8 @@ let CardDisplay = React.createClass({
 
 let TinyCard = React.createClass({
     handleClick() {
-        console.log("Remove " + this.props.children.id)
+        console.log("Remove " + this.props.children.id);
+        StorageClient.removePinned(this.props.children.id)
     },
     render() {
         let colClasses = "col s12 m4";
@@ -109,7 +110,7 @@ let TinyCard = React.createClass({
             <div className={colClasses}>
                 <div className="card light-blue white-text">
                     <div className="card-content white-text">
-                        <a onClick={this.handleClick} className="btn-floating btn-small waves-effect waves-light white float-right"><i className="material-icons blue-text">close</i></a>
+                        <a onClick={this.handleClick} className="btn-floating btn-small waves-effect waves-light white float-right delete-button"><i className="material-icons blue-text">close</i></a>
                         <span className="card-title">{this.props.children.courseCode}</span>
                         <p>{this.props.children.courseName}</p>
                         <span>{urlIcon} {fireIcon}</span>

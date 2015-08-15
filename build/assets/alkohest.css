@@ -99,3 +99,11 @@ pre {
 .float-right {
     float: right;
 }
+
+.delete-button {
+    display: none;
+}
+
+.card:hover > .card-content > .delete-button {
+    display: block;
+}
