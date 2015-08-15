@@ -51,17 +51,19 @@ let CardDisplay = React.createClass({
         StorageClient.swapPinned();
     },
     render() {
-        let firstCard = <TinyCard code={this.props.data[0].courseCode} offset="offset-l1">{this.props.data[0].courseName}</TinyCard>;
+        let firstCard = <TinyCard offset="offset-l1">{this.props.data[0]}</TinyCard>;
         let swapButton;
         let secondCard;
 
         if (this.props.data.length == 2) {
-            swapButton = (<div className="col s12 m2">
+            swapButton = (
+            <div className="col s12 m2">
                 <div className="aligner">
                     <a onClick={this.handleClick} className="btn-floating btn-large waves-effect waves-light red aligned-item" id="swap-button"><i className="material-icons">swap_horiz</i></a>
                 </div>
-            </div>);
-            secondCard = <TinyCard code={this.props.data[1].courseCode}>{this.props.data[1].courseName}</TinyCard>;
+            </div>
+            );
+            secondCard = <TinyCard>{this.props.data[1]}</TinyCard>;
         }
 
         return (
@@ -84,18 +86,33 @@ let CardDisplay = React.createClass({
 });
 
 let TinyCard = React.createClass({
+    handleClick() {
+        console.log("Remove " + this.props.children.id)
+    },
     render() {
         let colClasses = "col s12 m4";
         if (this.props.offset) {
             colClasses = colClasses + " " + this.props.offset;
         }
 
+        let urlIcon;
+        if (this.props.children.courseUrl) {
+            urlIcon = <i className="material-icons">school</i>;
+        }
+
+        let fireIcon;
+        if (this.props.children.fireUrl) {
+            fireIcon = <i className="material-icons">whatshot</i>;
+        }
+
         return(
             <div className={colClasses}>
                 <div className="card light-blue white-text">
                     <div className="card-content white-text">
-                        <span className="card-title">{this.props.code}</span>
-                        <p>{this.props.children}</p>
+                        <a onClick={this.handleClick} className="btn-floating btn-small waves-effect waves-light white float-right"><i className="material-icons blue-text">close</i></a>
+                        <span className="card-title">{this.props.children.courseCode}</span>
+                        <p>{this.props.children.courseName}</p>
+                        <span>{urlIcon} {fireIcon}</span>
                     </div>
                 </div>
             </div>

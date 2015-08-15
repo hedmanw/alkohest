@@ -50,7 +50,7 @@ let CourseRow = React.createClass({
     render() {
         let fire;
         if (this.props.fire) {
-            fire = <a href={this.props.fire} title="Fire"><i className="material-icons">file_upload</i></a>;
+            fire = <a href={this.props.fire} title="Fire"><i className="material-icons">whatshot</i></a>;
         }
         let pinButton;
         if (this.state.pinned) {
@@ -64,7 +64,7 @@ let CourseRow = React.createClass({
             <tr>
                 <td>{this.props.code}</td>
                 <td>{this.props.children}</td>
-                <td><a href={this.props.homepage} title="Hemsida"><i className="material-icons">home</i></a>
+                <td><a href={this.props.homepage} title="Hemsida"><i className="material-icons">school</i></a>
                     {fire}
                 </td>
                 <td>{pinButton}</td>

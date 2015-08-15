@@ -9,7 +9,13 @@ let Card = React.createClass({
                 return (<a key={item.desc} href={item.link}>{item.desc}</a>)
         });
 
-        let divClasses = "col s12 m" + (12/this.props.count);
+        let divClasses;
+        if (this.props.count == 1) {
+            divClasses = "col s12 m6"
+        }
+        else {
+            divClasses = "col s12 m" + (12/this.props.count);
+        }
 
         return(
             <div className={divClasses}>
