@@ -9,13 +9,8 @@ class StorageClient {
                 this.saveState([id]);
             }
             else {
-                if (this.isOpenOed()) {
-                    this.saveState(pinned.concat(id))
-                }
-                else {
-                    let head = pinned[0];
-                    this.saveState([id, head]);
-                }
+                let head = pinned[0];
+                this.saveState([id, head]);
             }
             PubSub.publish('pin');
         }
@@ -43,23 +38,12 @@ class StorageClient {
         window.localStorage.setItem('pinned', JSON.stringify(ids));
     }
 
-    // INVARIANT: getPinned().size() == 2
-    swapPinned() {
-        let pinned = this.getPinned();
-        this.addPinned(pinned[1]);
-    }
-
     subscribe(callback) {
         return PubSub.subscribe('pin', callback);
     }
 
     unsubscribe(token) {
         PubSub.unsubscribe(token);
-    }
-
-    // Set localStorage openoed -> true to enable inf course mode
-    isOpenOed() {
-        return window.localStorage.getItem('openoed')
     }
 }
 

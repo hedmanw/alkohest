@@ -47,24 +47,10 @@ let PinnedManagement = React.createClass({
 });
 
 let CardDisplay = React.createClass({
-    handleClick() {
-        StorageClient.swapPinned();
-    },
     render() {
-        let firstCard = <TinyCard offset="offset-l1">{this.props.data[0]}</TinyCard>;
-        let swapButton;
-        let secondCard;
-
-        if (this.props.data.length == 2) {
-            swapButton = (
-            <div className="col s12 m2">
-                <div className="aligner">
-                    <a onClick={this.handleClick} className="btn-floating btn-large waves-effect waves-light red aligned-item" id="swap-button"><i className="material-icons">swap_horiz</i></a>
-                </div>
-            </div>
-            );
-            secondCard = <TinyCard>{this.props.data[1]}</TinyCard>;
-        }
+        let dataset = {
+            courses: this.props.data
+        };
 
         return (
             <div className="section grey">
@@ -75,9 +61,7 @@ let CardDisplay = React.createClass({
                         </div>
                     </div>
                     <div className="row">
-                        {firstCard}
-                        {swapButton}
-                        {secondCard}
+                        <DraggableList data={dataset}/>
                     </div>
                 </div>
             </div>
@@ -91,11 +75,6 @@ let TinyCard = React.createClass({
         StorageClient.removePinned(this.props.children.id)
     },
     render() {
-        let colClasses = "col s12 m4";
-        if (this.props.offset) {
-            colClasses = colClasses + " " + this.props.offset;
-        }
-
         let urlIcon;
         if (this.props.children.courseUrl) {
             urlIcon = <i className="material-icons">school</i>;
@@ -107,16 +86,71 @@ let TinyCard = React.createClass({
         }
 
         return(
-            <div className={colClasses}>
-                <div className="card light-blue white-text">
-                    <div className="card-content white-text">
-                        <a onClick={this.handleClick} className="btn-floating btn-small waves-effect waves-light white float-right delete-button"><i className="material-icons blue-text">close</i></a>
-                        <span className="card-title">{this.props.children.courseCode}</span>
-                        <p>{this.props.children.courseName}</p>
-                        <span>{urlIcon} {fireIcon}</span>
-                    </div>
+            <div className="card light-blue white-text">
+                <div className="card-content white-text">
+                    <a onClick={this.handleClick} className="btn-floating btn-small waves-effect waves-light white float-right delete-button"><i className="material-icons blue-text">close</i></a>
+                    <span className="card-title">{this.props.children.courseCode}</span>
+                    <p>{this.props.children.courseName}</p>
+                    <span>{urlIcon} {fireIcon}</span>
                 </div>
             </div>
+        )
+    }
+});
+
+var DraggableList = React.createClass({
+    getInitialState() {
+        return {
+            data: this.props.data
+        };
+    },
+    updateState(courses, dragging) {
+        var data = this.state.data;
+        data.courses = courses;
+        data.dragging = dragging;
+        this.setState({data: data});
+    },
+    dragEnd() {
+        this.updateState(this.state.data.courses, undefined);
+    },
+    dragStart(e) {
+        this.dragged = Number(e.currentTarget.dataset.id);
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData("text/html", null)
+    },
+    dragOver(e) {
+        e.preventDefault();
+        var over = e.currentTarget;
+        var dragging = this.state.data.dragging;
+        var from = isFinite(dragging) ? dragging : this.dragged;
+        var to = Number(over.dataset.id);
+        if((e.clientY - over.offsetTop) > (over.offsetHeight / 2)) to++;
+        if(from < to) to--;
+
+        var items = this.state.data.courses;
+        items.splice(to, 0, items.splice(from,1)[0]);
+        this.updateState(items, to);
+    },
+    render() {
+        var listItems = this.state.data.courses.map((item, index) => {
+            var dragging = (index == this.state.data.dragging) ? "dragging" : "";
+            return (
+                <li data-id={index}
+                    className={dragging}
+                    key={index}
+                    draggable="true"
+                    onDragEnd={this.dragEnd}
+                    onDragOver={this.dragOver}
+                    onDragStart={this.dragStart}
+                    className="col s12 m4">
+                    <TinyCard>{item}</TinyCard>
+                </li>
+            );
+        }, this);
+
+        let appState = <pre>App State: <br/><br/>{JSON.stringify(this.state,0,2)}</pre>;
+        return (
+            <ul>{listItems}</ul>
         )
     }
 });
