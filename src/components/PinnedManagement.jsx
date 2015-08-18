@@ -40,32 +40,20 @@ let PinnedManagement = React.createClass({
         }
         else {
             return(
-                <CardDisplay data={this.state.data}/>
-            );
-        }
-    }
-});
-
-let CardDisplay = React.createClass({
-    render() {
-        let dataset = {
-            courses: this.props.data
-        };
-
-        return (
-            <div className="section grey">
-                <div className="container">
-                    <div className="row">
-                        <div className="col s12 offset-l1">
-                            <h5 className="white-text">På din <Link to="app" className="dotted-link">startsida</Link> nu:</h5>
+                <div className="section grey">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col s12 offset-l1">
+                                <h5 className="white-text">På din <Link to="app" className="dotted-link">startsida</Link> nu:</h5>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <DraggableList data={this.state.data}/>
                         </div>
                     </div>
-                    <div className="row">
-                        <DraggableList data={dataset}/>
-                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
     }
 });
 
@@ -97,21 +85,19 @@ let TinyCard = React.createClass({
     }
 });
 
-var DraggableList = React.createClass({
+let DraggableList = React.createClass({
     getInitialState() {
         return {
-            data: this.props.data
+            courses: this.props.data
         };
     },
     updateState(courses, dragging) {
-        let data = this.state.data;
-        data.courses = courses;
-        data.dragging = dragging;
-        this.setState({data: data}); // TODO: Duplication of state (i.e. both in LocalStorage and in component state), what to do?
+        // TODO: Duplication of state (i.e. both in LocalStorage and in component state), what to do?
+        this.setState({courses: courses, dragging: dragging});
         StorageClient.saveState(data.map(item => item.courseId))
     },
     dragEnd() {
-        this.updateState(this.state.data.courses, undefined);
+        this.updateState(this.state.courses, undefined);
     },
     dragStart(e) {
         this.dragged = Number(e.currentTarget.dataset.id);
@@ -121,7 +107,7 @@ var DraggableList = React.createClass({
     dragOver(e) {
         e.preventDefault();
         let over = e.currentTarget;
-        let dragging = this.state.data.dragging;
+        let dragging = this.state.dragging;
         let from = isFinite(dragging) ? dragging : this.dragged;
         let to = Number(over.dataset.id);
         if ((e.clientY - over.offsetTop) > (over.offsetHeight / 2)) {
@@ -131,13 +117,13 @@ var DraggableList = React.createClass({
             to--;
         }
 
-        let items = this.state.data.courses;
-        items.splice(to, 0, items.splice(from,1)[0]);
+        let items = this.state.courses;
+        items.splice(to, 0, items.splice(from, 1)[0]);
         this.updateState(items, to);
     },
     render() {
-        var listItems = this.state.data.courses.map((item, index) => {
-            var dragging = (index == this.state.data.dragging) ? "dragging" : "";
+        let listItems = this.state.courses.map((item, index) => {
+            let dragging = (index == this.state.dragging) ? "dragging" : "";
             return (
                 <li data-id={index}
                     className={dragging}
@@ -152,9 +138,12 @@ var DraggableList = React.createClass({
             );
         }, this);
 
-        let appState = <pre>App State: <br/><br/>{JSON.stringify(this.state,0,2)}</pre>;
+        let appState = <pre>Component State: <br/><br/>{JSON.stringify(this.state,0,2)}</pre>;
         return (
-            <ul>{listItems}</ul>
+            <div>
+                <ul>{listItems}</ul>
+                {appState}
+            </div>
         )
     }
 });
