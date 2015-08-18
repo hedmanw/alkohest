@@ -1,16 +1,15 @@
 import PubSub from "pubsub-js"
 
 class StorageClient {
-
     addPinned(id) {
         if (window.localStorage) {
             let pinned = this.getPinned();
+            // TODO: redundant if-case?
             if (pinned.length == 0) {
                 this.saveState([id]);
             }
             else {
-                let head = pinned[0];
-                this.saveState([id, head]);
+                this.saveState(pinned.concat(id));
             }
             PubSub.publish('pin');
         }

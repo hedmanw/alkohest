@@ -71,8 +71,7 @@ let CardDisplay = React.createClass({
 
 let TinyCard = React.createClass({
     handleClick() {
-        console.log("Remove " + this.props.children.id);
-        StorageClient.removePinned(this.props.children.id)
+        StorageClient.removePinned(this.props.children.id);
     },
     render() {
         let urlIcon;
@@ -105,10 +104,11 @@ var DraggableList = React.createClass({
         };
     },
     updateState(courses, dragging) {
-        var data = this.state.data;
+        let data = this.state.data;
         data.courses = courses;
         data.dragging = dragging;
-        this.setState({data: data});
+        this.setState({data: data}); // TODO: Duplication of state (i.e. both in LocalStorage and in component state), what to do?
+        StorageClient.saveState(data.map(item => item.courseId))
     },
     dragEnd() {
         this.updateState(this.state.data.courses, undefined);
@@ -120,14 +120,18 @@ var DraggableList = React.createClass({
     },
     dragOver(e) {
         e.preventDefault();
-        var over = e.currentTarget;
-        var dragging = this.state.data.dragging;
-        var from = isFinite(dragging) ? dragging : this.dragged;
-        var to = Number(over.dataset.id);
-        if((e.clientY - over.offsetTop) > (over.offsetHeight / 2)) to++;
-        if(from < to) to--;
+        let over = e.currentTarget;
+        let dragging = this.state.data.dragging;
+        let from = isFinite(dragging) ? dragging : this.dragged;
+        let to = Number(over.dataset.id);
+        if ((e.clientY - over.offsetTop) > (over.offsetHeight / 2)) {
+            to++;
+        }
+        if (from < to) {
+            to--;
+        }
 
-        var items = this.state.data.courses;
+        let items = this.state.data.courses;
         items.splice(to, 0, items.splice(from,1)[0]);
         this.updateState(items, to);
     },
@@ -142,7 +146,7 @@ var DraggableList = React.createClass({
                     onDragEnd={this.dragEnd}
                     onDragOver={this.dragOver}
                     onDragStart={this.dragStart}
-                    className="col s12 m4">
+                    className="col s12 m3">
                     <TinyCard>{item}</TinyCard>
                 </li>
             );
