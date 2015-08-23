@@ -51,6 +51,13 @@
     cursor: default;
 }
 
+.disabled-red, .disabled-red:hover {
+    background-color: #F44336;
+    box-shadow: none;
+    color: #fff !important;
+    cursor: default;
+}
+
 .dotted-link {
     color: #fff;
     border-bottom: 1px dotted #f1f1f1;

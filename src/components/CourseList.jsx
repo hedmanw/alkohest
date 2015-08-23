@@ -57,7 +57,12 @@ let CourseRow = React.createClass({
             pinButton = <a className="btn disabled-green"><i className="material-icons">done</i></a>
         }
         else {
-            pinButton = <a onClick={this.handleClick} className="btn blue"><i className="material-icons">add</i></a>
+            if (StorageClient.getPinned().length < 4) {
+                pinButton = <a onClick={this.handleClick} className="btn blue"><i className="material-icons">add</i></a>;
+            }
+            else {
+                pinButton = <a className="btn disabled-red tooltipped" data-position="right" data-delay="50" data-tooltip="Nopex"><i className="material-icons">not_interested</i></a>;
+            }
         }
 
         return(
