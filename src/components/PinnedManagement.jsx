@@ -13,7 +13,6 @@ let PinnedManagement = React.createClass({
     updateData() {
         CourseClient.getByIds(StorageClient.getPinned(),
             function(data) {
-                console.log("New data: " + JSON.stringify(data.map(item => item.id)));
                 this.setState({data: data});
             }.bind(this),
             function() {
@@ -24,7 +23,6 @@ let PinnedManagement = React.createClass({
     componentDidMount() {
         this.updateData();
         let token = StorageClient.subscribe(function() {
-            console.log("Pin status changed");
             this.updateData();
         }.bind(this));
         this.setState({token: token});
@@ -39,13 +37,13 @@ let PinnedManagement = React.createClass({
             return(<div/>);
         }
         else {
-            console.log("New data rendered into list: " + JSON.stringify(this.state.data.map(item => item.id)));
             return(
                 <div className="section grey">
                     <div className="container">
                         <div className="row">
-                            <div className="col s12 offset-l1">
+                            <div className="col s12">
                                 <h5 className="white-text">På din <Link to="app" className="dotted-link">startsida</Link> nu:</h5>
+                                <p className="white-text">Använd drag and drop för att ändra ordning på kurserna.</p>
                             </div>
                         </div>
                         <div className="row">
@@ -134,17 +132,9 @@ let DraggableList = React.createClass({
             );
         }, this);
 
-        console.log("Render List " + JSON.stringify(this.props.data.map(item => item.id)));
         let appState = <pre>Component State: <br/><br/>{JSON.stringify(this.props.data,0,2)}</pre>;
         return (
-            <div>
-                <ul>{listItems}</ul>
-                <div className="row">
-                    <div className="col s12 m12">
-                        {appState}
-                    </div>
-                </div>
-            </div>
+            <ul>{listItems}</ul>
         )
     }
 });
