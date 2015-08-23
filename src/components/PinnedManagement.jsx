@@ -6,14 +6,14 @@ import CourseClient from "../clients/CourseClient.js";
 let PinnedManagement = React.createClass({
     getInitialState() {
         return {
-            courses: StorageClient.getPinned(),
             data: [],
             token: null
         };
     },
     updateData() {
-        CourseClient.getByIds(this.state.courses,
+        CourseClient.getByIds(StorageClient.getPinned(),
             function(data) {
+                console.log("New data: " + JSON.stringify(data.map(item => item.id)));
                 this.setState({data: data});
             }.bind(this),
             function() {
@@ -24,7 +24,7 @@ let PinnedManagement = React.createClass({
     componentDidMount() {
         this.updateData();
         let token = StorageClient.subscribe(function() {
-            this.setState({courses: StorageClient.getPinned()});
+            console.log("Pin status changed");
             this.updateData();
         }.bind(this));
         this.setState({token: token});
@@ -39,6 +39,7 @@ let PinnedManagement = React.createClass({
             return(<div/>);
         }
         else {
+            console.log("New data rendered into list: " + JSON.stringify(this.state.data.map(item => item.id)));
             return(
                 <div className="section grey">
                     <div className="container">
@@ -87,17 +88,10 @@ let TinyCard = React.createClass({
 
 let DraggableList = React.createClass({
     getInitialState() {
-        return {
-            courses: this.props.data
-        };
-    },
-    updateState(courses, dragging) {
-        // TODO: Duplication of state (i.e. both in LocalStorage and in component state), what to do?
-        this.setState({courses: courses, dragging: dragging});
-        StorageClient.saveState(courses.map(item => item.id));
+        return {};
     },
     dragEnd() {
-        this.updateState(this.state.courses, undefined);
+        this.setState({dragging: null});
     },
     dragStart(e) {
         this.dragged = Number(e.currentTarget.dataset.id);
@@ -117,12 +111,14 @@ let DraggableList = React.createClass({
             to--;
         }
 
-        let items = this.state.courses;
+        let items = this.props.data;
         items.splice(to, 0, items.splice(from, 1)[0]);
-        this.updateState(items, to);
+
+        this.setState({dragging: to});
+        StorageClient.saveState(this.props.data.map(item => item.id));
     },
     render() {
-        let listItems = this.state.courses.map((item, index) => {
+        let listItems = this.props.data.map((item, index) => {
             let dragging = (index == this.state.dragging) ? "dragging" : "";
             return (
                 <li data-id={index}
@@ -138,7 +134,8 @@ let DraggableList = React.createClass({
             );
         }, this);
 
-        let appState = <pre>Component State: <br/><br/>{JSON.stringify(this.state,0,2)}</pre>;
+        console.log("Render List " + JSON.stringify(this.props.data.map(item => item.id)));
+        let appState = <pre>Component State: <br/><br/>{JSON.stringify(this.props.data,0,2)}</pre>;
         return (
             <div>
                 <ul>{listItems}</ul>
