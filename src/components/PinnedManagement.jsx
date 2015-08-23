@@ -134,7 +134,6 @@ let DraggableList = React.createClass({
             );
         }, this);
 
-        let appState = <pre>Component State: <br/><br/>{JSON.stringify(this.props.data,0,2)}</pre>;
         return (
             <ul>{listItems}</ul>
         )

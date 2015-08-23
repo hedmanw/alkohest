@@ -3,10 +3,10 @@ import React from "react";
 let Card = React.createClass({
     render() {
         let buttons = [
-            {link:this.props.homepage, desc:"Kurshemsida"},
-            {link:this.props.fire, desc:"Fire"}
+            {link:this.props.homepage, icon:"school", desc:"Kurshemsida"},
+            {link:this.props.fire, icon:"whatshot", desc:"Fire"}
         ].filter(item => item.link).map(item => {
-                return (<a key={item.desc} href={item.link}>{item.desc}</a>)
+                return (<a key={item.desc} href={item.link} className="card-link"><i className="material-icons">{item.icon}</i> {item.desc}</a>)
         });
 
         let divClasses;

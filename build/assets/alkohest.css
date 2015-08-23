@@ -114,3 +114,11 @@ pre {
 .card:hover > .card-content > .delete-button {
     display: block;
 }
+
+.card-link {
+    color: #FFFFFF !important;
+}
+
+.card-link:hover, .card-link:active {
+    color: #ffab00 !important;
+}
