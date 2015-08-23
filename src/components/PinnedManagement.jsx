@@ -89,7 +89,7 @@ let DraggableList = React.createClass({
         return {};
     },
     dragEnd() {
-        this.setState({dragging: null});
+        this.setState({dragging: undefined});
     },
     dragStart(e) {
         this.dragged = Number(e.currentTarget.dataset.id);
@@ -102,7 +102,9 @@ let DraggableList = React.createClass({
         let dragging = this.state.dragging;
         let from = isFinite(dragging) ? dragging : this.dragged;
         let to = Number(over.dataset.id);
-        if ((e.clientY - over.offsetTop) > (over.offsetHeight / 2)) {
+
+        //console.log("X=" + e.clientX + " overOffLeft=" + over.offsetLeft + " offsetWidth=" + over.offsetWidth + " fr/to=" + from + "/" + to);
+        if ((e.clientX - over.offsetLeft) > (over.offsetWidth / 2)) {
             to++;
         }
         if (from < to) {
