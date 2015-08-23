@@ -14,7 +14,9 @@ class CourseClient {
     }
 
     getByIds(ids, resolve, reject) {
-        this.get("course?ids=" + JSON.stringify(ids), resolve, reject)
+        this.get("course?ids=" + JSON.stringify(ids), function(data) {
+            resolve(ids.map(id => data.filter(item => item.id === id)[0]))
+        }, reject)
     }
 
     get(urlExtension, resolve, reject) {

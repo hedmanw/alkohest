@@ -94,7 +94,7 @@ let DraggableList = React.createClass({
     updateState(courses, dragging) {
         // TODO: Duplication of state (i.e. both in LocalStorage and in component state), what to do?
         this.setState({courses: courses, dragging: dragging});
-        StorageClient.saveState(data.map(item => item.courseId))
+        StorageClient.saveState(courses.map(item => item.id));
     },
     dragEnd() {
         this.updateState(this.state.courses, undefined);
@@ -142,7 +142,11 @@ let DraggableList = React.createClass({
         return (
             <div>
                 <ul>{listItems}</ul>
-                {appState}
+                <div className="row">
+                    <div className="col s12 m12">
+                        {appState}
+                    </div>
+                </div>
             </div>
         )
     }

@@ -48,17 +48,12 @@ class CourseData {
         }).then(res);
     }
     getByIds(ids, res) {
-        let sortOrder = 'ASC';
-        if (ids.length == 2 && ids[0] > ids[1]) {
-            sortOrder = 'DESC';
-        }
         Course.findAll({
             where: {
                 id: {
                     $in: ids
                 }
-            },
-            order: [['id', sortOrder]]
+            }
         }).then(res);
     }
 
