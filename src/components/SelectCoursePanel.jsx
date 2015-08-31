@@ -35,7 +35,8 @@ let SelectCoursePanel = React.createClass({
         e.preventDefault();
         this.updateSearchResults(this.state.searchText);
     },
-    updateSearchResults(searchString) {
+    updateSearchResults(search) {
+        let searchString = search.toLowerCase();
         let newData = this.state.data.filter(item => (item.courseCode.toLowerCase().includes(searchString) || item.courseName.toLowerCase().includes(searchString)));
         this.setState({displayData: newData});
     },
