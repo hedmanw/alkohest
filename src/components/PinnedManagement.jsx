@@ -43,7 +43,6 @@ let PinnedManagement = React.createClass({
                         <div className="row">
                             <div className="col s12">
                                 <h5 className="white-text">På din <Link to="app" className="dotted-link">startsida</Link> nu:</h5>
-                                <p className="white-text">Använd drag and drop för att ändra ordning på kurserna.</p>
                             </div>
                         </div>
                         <div className="row">
