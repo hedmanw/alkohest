@@ -1,2 +1,2 @@
 npm run build
-sudo npm run deploy
+npm run deploy

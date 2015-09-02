@@ -119,15 +119,15 @@ let DraggableList = React.createClass({
     },
     render() {
         let listItems = this.props.data.map((item, index) => {
-            let dragging = (index == this.state.dragging) ? "dragging" : "";
+            //let dragging = (index == this.state.dragging) ? "dragging" : "";
             return (
                 <li data-id={index}
-                    className={dragging}
+                    //className={dragging}
                     key={index}
-                    draggable="true"
-                    onDragEnd={this.dragEnd}
-                    onDragOver={this.dragOver}
-                    onDragStart={this.dragStart}
+                    //draggable="true"
+                    //onDragEnd={this.dragEnd}
+                    //onDragOver={this.dragOver}
+                    //onDragStart={this.dragStart}
                     className="col s12 m3">
                     <TinyCard>{item}</TinyCard>
                 </li>
