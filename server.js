@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 let sequelize = new Sequelize('alkohest', appConf.databaseUser, appConf.databasePassword, {
     host: 'localhost',
-    dialect: 'mysql',
+    dialect: 'postgres',
     pool: {
         max: 5,
         min: 0,
