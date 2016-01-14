@@ -10,9 +10,10 @@
     "test": "mochify",
     "test-watch": "mochify --watch",
     "cover": "node cover.js && cat lcov.info | coveralls && rm lcov.info",
-    "start": "babel-node server.js",
-    "deploy": "babel-node server.js",
-    "clean": "rm build/app.js"
+    "start": "babel-node server/server.js",
+    "deploy": "node ./out/server.js",
+    "compile": "babel -d ./out ./server -s && cp ./server/environmentConfig.json ./out",
+    "clean": "rm build/app.js && rm -rf out && mkdir out"
   },
   "repository": {
     "type": "git",

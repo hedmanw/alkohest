@@ -2,11 +2,11 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import api from './api.js'
 import Sequelize from "sequelize";
-import appConf from "./environmentConfig.json"
+import appConf from "./../out/environmentConfig.json"
 
 let app = express();
 
-app.use(express.static(__dirname + '/build'));
+app.use(express.static(__dirname + '/../build'));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

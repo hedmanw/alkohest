@@ -1,5 +1,5 @@
-import courses from './model/course.js'
-import appConf from "./environmentConfig.json"
+import courses from './course.js'
+import appConf from "./../out/environmentConfig.json"
 
 function createSchemata(sequelize) {
     courses.schemaDefinition(sequelize)
