@@ -5,3 +5,4 @@ build/app.js
 node_modules/
 src/clients/config.json
 environmentConfig.json
+out/

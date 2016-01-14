@@ -1,7 +1,0 @@
-{
-  "bindPort": "8080",
-  "databaseHost": "localhost",
-  "databaseUser": "root",
-  "databasePassword": "",
-  "apiKey": ""
-}
