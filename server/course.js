@@ -34,7 +34,9 @@ class CourseData {
     }
 
     getAll(res) {
-        Course.findAll().then(res);
+        Course.findAll({
+            order: 'id ASC'
+        }).then(res);
     }
     getById(id, res) {
         Course.findOne({
