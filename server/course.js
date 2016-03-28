@@ -29,8 +29,10 @@ class CourseData {
                 isUrl: true
             }
         });
+    }
 
-        Course.sync();
+    getCourse() {
+        return Course;
     }
 
     getAll(res) {

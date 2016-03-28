@@ -1,8 +1,15 @@
 import courses from './course.js'
+import suggestions from './suggestion'
 import appConf from "./../out/environmentConfig.json"
 
 function createSchemata(sequelize) {
-    courses.schemaDefinition(sequelize)
+    courses.schemaDefinition(sequelize);
+    suggestions.schemaDefinition(sequelize);
+    courses.getCourse().hasMany(suggestions.getSuggestion());
+    suggestions.getSuggestion().belongsTo(courses.getCourse());
+
+    courses.getCourse().sync();
+    suggestions.getSuggestion().sync();
 }
 
 function registerPaths(app) {
@@ -70,6 +77,27 @@ function registerPaths(app) {
             }, (e) => {
                 res.status(500).send(e.errors);
             });
+        }
+        else {
+            res.status(401).send("Unauthorized.\n");
+        }
+    });
+
+    app.post('/suggestion', function(req, res) {
+        let courseId = req.body.courseId;
+        let suggestedUrl = req.body.courseUrl;
+        let suggestedFire = req.body.courseFire;
+        let ipAddr = req.connection.remoteAddress;
+        suggestions.create(courseId, suggestedUrl, suggestedFire, ipAddr, (suggestion) => {
+            res.send("OK!")
+        }, (e) => {
+            res.status(500).send(e.errors);
+        });
+    });
+
+    app.get('/admin/suggestion', function(req, res) {
+        if (isAuthorized(req)) {
+            suggestions.getAll((suggestion) => res.send(suggestion));
         }
         else {
             res.status(401).send("Unauthorized.\n");

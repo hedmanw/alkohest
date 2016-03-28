@@ -24,7 +24,7 @@ let sequelize = new Sequelize('alkohest', appConf.databaseUser, appConf.database
 api.createSchemata(sequelize);
 api.registerPaths(app);
 
-let port = process.argv[2] || appConf.bindPort;
+let port = appConf.bindPort;
 
 let server = app.listen(port, function () {
     let host = server.address().address;
